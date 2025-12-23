@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+*.log
+*.db
+.env
+.env.local
+.env.development
+.env.test
+deploy.ps1
+setup-*.ps1
+*.ico
+*.png
+Thumbs.db
+.DS_Store

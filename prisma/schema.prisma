@@ -1,0 +1,335 @@
+// LLMReady/CitedBy - Database Schema
+// AI Search Optimization SaaS
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// AUTH MODELS (NextAuth.js compatible)
+// ============================================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================
+// USER MODEL
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+
+  // Billing
+  stripeCustomerId String? @unique
+  plan             String  @default("FREE")
+
+  // Relations
+  accounts     Account[]
+  sessions     Session[]
+  businesses   Business[]
+  subscription Subscription?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// BUSINESS MODEL (Core Entity)
+// ============================================
+
+model Business {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Core identity
+  name         String
+  nameVariants String? // JSON: {"de": "...", "fr": "...", "it": "...", "en": "..."}
+  uid          String? // Swiss UID (CHE-xxx.xxx.xxx)
+
+  // Location
+  addressStreet  String?
+  addressCity    String?
+  addressPostal  String?
+  addressCanton  String? // Swiss canton (ZH, BE, GE, etc.)
+  addressCountry String  @default("CH")
+  geoLat         Float?
+  geoLng         Float?
+
+  // Contact
+  phone   String?
+  email   String?
+  website String?
+
+  // Business details
+  industry     String?
+  description  String?
+  services     String? // JSON array of service objects
+  openingHours String? // JSON structured opening hours
+
+  // Key people (for Person schema)
+  keyPeople String? // JSON array of {name, role, description}
+
+  // Generated entity profile
+  entityProfile String? // JSON
+
+  // Scores (0-100)
+  visibilityScore Int @default(0)
+  citationScore   Int @default(0)
+  schemaScore     Int @default(0)
+  overallScore    Int @default(0)
+
+  // Status
+  status         String @default("DRAFT") // DRAFT, ACTIVE, PAUSED, ARCHIVED
+  onboardingStep Int    @default(1)
+
+  // Relations
+  citations   Citation[]
+  llmChecks   LlmCheck[]
+  schemaItems SchemaItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+// ============================================
+// CITATIONS MODEL (Directory Listings)
+// ============================================
+
+model Citation {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  // Source info
+  source     String  // 'google_business', 'local_ch', 'search_ch', etc.
+  sourceName String? // Display name: "Google Business Profile"
+  sourceUrl  String? // URL to the listing
+  sourceIcon String? // Icon URL or identifier
+
+  // NAP data found on this citation
+  listedName    String?
+  listedAddress String?
+  listedPhone   String?
+  listedWebsite String?
+
+  // Status
+  status        String @default("pending") // pending, submitted, verified, conflict, not_found
+  napMatchScore Int?   // 0-100 (how well NAP matches canonical)
+  issues        String? // JSON array of issues found
+
+  // Tracking
+  submittedAt   DateTime?
+  verifiedAt    DateTime?
+  lastCheckedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([businessId, source])
+  @@index([businessId])
+  @@index([status])
+}
+
+// ============================================
+// LLM VISIBILITY CHECKS
+// ============================================
+
+model LlmCheck {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  // Provider info
+  provider String // 'openai', 'anthropic', 'perplexity', 'google'
+  model    String? // 'gpt-4', 'claude-3-opus', etc.
+
+  // Prompt details
+  prompt String // The actual prompt sent
+
+  // Response
+  response String?
+
+  // Analysis
+  mentioned      Boolean @default(false)
+  accuracyScore  Int?    // 0-100
+  sentiment      String? // POSITIVE, NEUTRAL, NEGATIVE
+  mentionContext String? // The part mentioning the business
+
+  // Extracted info
+  extractedInfo String? // JSON - What the LLM said about the business
+
+  createdAt DateTime @default(now())
+
+  @@index([businessId])
+  @@index([provider])
+  @@index([createdAt])
+}
+
+// ============================================
+// SCHEMA ITEMS (Generated JSON-LD)
+// ============================================
+
+model SchemaItem {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  // Schema info
+  schemaType String // 'Organization', 'LocalBusiness', 'Service', 'FAQPage', 'Person'
+  jsonLd     String // JSON - The actual JSON-LD
+
+  // Status
+  status           String  @default("generated") // generated, implemented, verified, invalid
+  validationErrors String? // JSON - Any validation issues
+
+  // Implementation tracking
+  implementedAt DateTime?
+  verifiedAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([businessId])
+  @@index([schemaType])
+}
+
+// ============================================
+// SUBSCRIPTION & BILLING
+// ============================================
+
+model Subscription {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Stripe data
+  stripeSubscriptionId   String? @unique
+  stripePriceId          String?
+  stripeCurrentPeriodEnd DateTime?
+
+  // Plan info
+  plan   String @default("FREE") // FREE, STARTER, GROWTH, PRO, ENTERPRISE
+  status String @default("ACTIVE") // ACTIVE, PAST_DUE, CANCELED, INCOMPLETE, TRIALING
+
+  // Limits tracking
+  businessesUsed Int @default(0)
+  citationsUsed  Int @default(0)
+  llmChecksUsed  Int @default(0)
+
+  // Period tracking
+  currentPeriodStart DateTime?
+  currentPeriodEnd   DateTime?
+
+  cancelAtPeriodEnd Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// CITATION SOURCES (Reference Data)
+// ============================================
+
+model CitationSource {
+  id String @id @default(cuid())
+
+  // Identity
+  slug    String @unique // 'google_business', 'local_ch'
+  name    String         // "Google Business Profile"
+  url     String         // Base URL
+  iconUrl String?
+
+  // Classification
+  category   String // MAJOR_PLATFORM, NATIONAL_DIRECTORY, INDUSTRY_SPECIFIC, REVIEW_PLATFORM, SOCIAL_PLATFORM
+  country    String @default("CH") // ISO country code
+  industries String? // JSON array - Industries this applies to (empty = all)
+
+  // Capabilities
+  priority   Int     @default(3) // 1 = highest priority
+  hasApi     Boolean @default(false)
+  autoSubmit Boolean @default(false)
+
+  // Submission info
+  submissionUrl   String?
+  submissionGuide String? // Markdown instructions
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([country])
+  @@index([category])
+  @@index([isActive])
+}
+
+// ============================================
+// AUDIT LOG (Activity Tracking)
+// ============================================
+
+model AuditLog {
+  id         String  @id @default(cuid())
+  userId     String?
+  businessId String?
+
+  action     String // 'business.created', 'citation.updated', etc.
+  entityType String // 'business', 'citation', 'schema', etc.
+  entityId   String?
+
+  metadata String? // JSON - Additional context
+
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([businessId])
+  @@index([action])
+  @@index([createdAt])
+}

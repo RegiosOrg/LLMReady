@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "title": "GetCitedBy - Von KI-Suche zitiert werden",
+    "description": "Machen Sie Ihr Unternehmen zu einer Entit\u00e4t, die ChatGPT, Claude und KI-Assistenten finden, vertrauen und Kunden empfehlen k\u00f6nnen."
+  },
+  "nav": {
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "faq": "FAQ",
+    "login": "Anmelden",
+    "getStarted": "Loslegen"
+  },
+  "hero": {
+    "badge": "KI-Suchoptimierung für Schweizer Unternehmen",
+    "title": "Zitiert werden von",
+    "titleHighlight": "KI-Assistenten",
+    "subtitle": "Machen Sie Ihr Unternehmen zu einer Entität, die ChatGPT, Claude und KI-Assistenten finden, vertrauen und Kunden empfehlen können.",
+    "cta": "Kostenlose Analyse starten",
+    "ctaSecondary": "So funktioniert es",
+    "stat1": "Schweizer Unternehmen",
+    "stat2": "KI-Zitierungen",
+    "stat3": "Durchschn. Sichtbarkeitssteigerung",
+    "trustedBy": "Vertraut von Unternehmen in:",
+    "geneva": "Genf",
+    "chatQuestion": "Wer ist der beste Treuhänder in Zürich?",
+    "chatAnswerPart1": "Basierend auf meiner Recherche ist ",
+    "chatAnswerCompany": "Brigger Treuhand GmbH",
+    "chatAnswerPart2": " in Zürich sehr empfohlen. Sie spezialisieren sich auf Buchhaltung, Steuererklärung und Unternehmensberatung."
+  },
+  "problem": {
+    "title": "Das Problem",
+    "subtitle": "Wenn Kunden KI um Empfehlungen bitten, wird Ihr Unternehmen erwähnt?",
+    "card1Title": "Traditionelles SEO reicht nicht",
+    "card1Text": "Google-Rankings garantieren keine KI-Sichtbarkeit. ChatGPT und Claude nutzen andere Datenquellen.",
+    "card2Title": "KI-Assistenten sind die neue Suche",
+    "card2Text": "40% der Produktsuchen beginnen jetzt mit KI. Wenn Sie nicht zitiert werden, sind Sie unsichtbar.",
+    "card3Title": "Ihre Konkurrenz passt sich an",
+    "card3Text": "Frühe Anwender optimieren bereits für KI. Lassen Sie sich nicht abhängen.",
+    "seoTitle": "Traditionelles SEO funktioniert nicht für KI",
+    "seoSubtitle": "LLMs crawlen nicht wie Google. Sie brauchen konsistente Fakten, strukturierte Daten und autoritative Quellen.",
+    "whatDoesntWork": "Was nicht funktioniert",
+    "whatLLMsNeed": "Was LLMs brauchen",
+    "doesntWork1": "Keyword-Stuffing in Blog-Posts",
+    "doesntWork2": "Backlink-Schemata",
+    "doesntWork3": "Dünne Inhaltsseiten",
+    "doesntWork4": "Inkonsistente Geschäftsinformationen",
+    "llmsNeed1": "Konsistente Entitäts-Daten überall",
+    "llmsNeed2": "Zitate aus vertrauenswürdigen Quellen",
+    "llmsNeed3": "Schema.org strukturiertes Markup",
+    "llmsNeed4": "Klare, faktenbasierte Inhalte"
+  },
+  "features": {
+    "title": "So funktioniert GetCitedBy",
+    "subtitle": "Wir optimieren Ihre Unternehmenspräsenz für KI-Erkennung und -Empfehlungen",
+    "feature1Title": "KI-Sichtbarkeitsprüfung",
+    "feature1Text": "Wir testen, wie ChatGPT, Claude und andere KI-Assistenten Ihr Unternehmen wahrnehmen und empfehlen.",
+    "feature2Title": "Entitätsoptimierung",
+    "feature2Text": "Wir erstellen Ihre kanonische Unternehmenseinheit mit strukturierten Daten, die KI-Systeme verstehen.",
+    "feature3Title": "Zitationsaufbau",
+    "feature3Text": "Wir erstellen autoritäre Zitate auf Plattformen, denen KI-Systeme vertrauen und die sie referenzieren.",
+    "feature4Title": "Schema-Markup",
+    "feature4Text": "Wir implementieren LocalBusiness-Schema, das KI hilft, Ihre Dienstleistungen und Ihren Standort zu verstehen.",
+    "feature5Title": "NAP-Konsistenz",
+    "feature5Text": "Wir stellen sicher, dass Name, Adresse und Telefon über alle Zitate hinweg konsistent sind.",
+    "feature6Title": "Leistungsüberwachung",
+    "feature6Text": "Wir überwachen Ihre KI-Sichtbarkeit und liefern umsetzbare Verbesserungsberichte.",
+    "entityBuilder": "Entitäts-Builder",
+    "entityBuilderDesc": "Erstellen Sie eine konsistente Identität, die KI verstehen und vertrauen kann",
+    "citationsManager": "Zitations-Manager",
+    "citationsManagerDesc": "Verfolgen und korrigieren Sie Ihre Präsenz auf 50+ Verzeichnissen",
+    "schemaGenerator": "Schema-Generator",
+    "schemaGeneratorDesc": "Automatische Generierung strukturierter Daten für Ihre Website",
+    "aiVisibilityTracker": "KI-Sichtbarkeits-Tracker",
+    "aiVisibilityTrackerDesc": "Überwachen Sie, wie oft KI Ihr Unternehmen empfiehlt"
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Wählen Sie den Plan, der zu Ihrem Unternehmen passt",
+    "monthly": "Monatlich",
+    "yearly": "Jährlich",
+    "yearlyDiscount": "20% sparen",
+    "perMonth": "Monat",
+    "mostPopular": "Am beliebtesten",
+    "getStarted": "Loslegen",
+    "starter": {
+      "name": "Starter",
+      "price": "CHF 99",
+      "period": "/Monat",
+      "description": "Für Unternehmen am Anfang",
+      "features": [
+        "Entitäts-Profil-Setup",
+        "20 Zitationen-Audit",
+        "Basis-Schema-Generierung",
+        "Monatlicher Sichtbarkeitsbericht"
+      ],
+      "cta": "Kostenlos testen"
+    },
+    "growth": {
+      "name": "Growth",
+      "price": "CHF 299",
+      "period": "/Monat",
+      "description": "Für seriöse Unternehmen",
+      "features": [
+        "Alles in Starter",
+        "50 Zitationen getrackt",
+        "Wöchentliche Sichtbarkeitsüberwachung",
+        "Zitations-Drift-Warnungen",
+        "Prioritäts-Support"
+      ],
+      "cta": "Loslegen"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "CHF 599",
+      "period": "/Monat",
+      "description": "Done-for-you Service",
+      "features": [
+        "Alles in Growth",
+        "Wir übermitteln Zitationen für Sie",
+        "Tägliche Sichtbarkeitsüberwachung",
+        "KI-Inhalts-Entwürfe",
+        "Mehrsprachig (DE/FR/IT/EN)"
+      ],
+      "cta": "Loslegen"
+    },
+    "professional": {
+      "name": "Professional",
+      "price": "CHF 249",
+      "period": "/Monat",
+      "description": "Für wachsende Unternehmen mit ernsthaftem KI-Fokus",
+      "popular": "Am beliebtesten",
+      "features": [
+        "KI-Sichtbarkeitsprüfung (Wöchentlich)",
+        "Vollständige Entitätsoptimierung",
+        "50 Zitationsquellen",
+        "Schema-Markup-Implementierung",
+        "Konkurrenzanalyse",
+        "Prioritäts-Support"
+      ],
+      "cta": "Kostenlos testen"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "CHF 499",
+      "period": "/Monat",
+      "description": "Für Unternehmen, die maximale KI-Sichtbarkeit benötigen",
+      "features": [
+        "Tägliche KI-Sichtbarkeitsüberwachung",
+        "Erweitertes Entitätsmanagement",
+        "Unbegrenzte Zitate",
+        "Individuelle Schema-Entwicklung",
+        "Multi-Standort-Unterstützung",
+        "Dedizierter Account Manager",
+        "API-Zugang"
+      ],
+      "cta": "Vertrieb kontaktieren"
+    }
+  },
+  "faq": {
+    "title": "H\u00e4ufig gestellte Fragen",
+    "questions": [
+      {
+        "q": "Was ist KI-Suchoptimierung?",
+        "a": "KI-Suchoptimierung (auch LLM SEO oder GEO genannt) ist die Praxis, Ihre Unternehmensinformationen so zu optimieren, dass KI-Assistenten wie ChatGPT, Claude und Googles KI Ihr Unternehmen genau finden, verstehen und Nutzern empfehlen k\u00f6nnen."
+      },
+      {
+        "q": "Wie unterscheidet sich das von traditionellem SEO?",
+        "a": "Traditionelles SEO konzentriert sich auf Googles Suchalgorithmus. KI-Suchoptimierung konzentriert sich darauf, wie grosse Sprachmodelle (LLMs) Ihr Unternehmen wahrnehmen und zitieren. Obwohl es \u00dcberschneidungen gibt, nutzen KI-Systeme andere Datenquellen und priorisieren strukturierte, autorit\u00e4re Informationen anders."
+      },
+      {
+        "q": "Wie messen Sie KI-Sichtbarkeit?",
+        "a": "Wir f\u00fchren systematische Tests durch, bei denen wir verschiedene KI-Assistenten nach Unternehmen in Ihrer Branche und Region fragen. Wir verfolgen, ob Ihr Unternehmen erw\u00e4hnt wird, wie genau es beschrieben wird und ob es empfohlen wird. Wir liefern detaillierte Berichte, die Ihren Sichtbarkeitswert im Zeitverlauf zeigen."
+      },
+      {
+        "q": "Wie lange dauert es, bis ich Ergebnisse sehe?",
+        "a": "Erste Verbesserungen bei der Zitationsgenauigkeit k\u00f6nnen innerhalb von 2-4 Wochen gesehen werden. Signifikante Verbesserungen bei KI-Empfehlungsraten dauern typischerweise 2-3 Monate, w\u00e4hrend KI-Systeme ihre Wissensdatenbanken aktualisieren und unser Zitationsaufbau wirksam wird."
+      },
+      {
+        "q": "Arbeiten Sie mit Unternehmen ausserhalb der Schweiz?",
+        "a": "Derzeit konzentrieren wir uns auf Schweizer Unternehmen, insbesondere in deutschsprachigen und franz\u00f6sischsprachigen Regionen. Wir planen, 2025 auf andere europ\u00e4ische M\u00e4rkte zu expandieren."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Bereit, von KI zitiert zu werden?",
+    "subtitle": "Schliessen Sie sich Schweizer Unternehmen an, die bereits f\u00fcr KI-Suche optimieren. Starten Sie mit einem kostenlosen Sichtbarkeitsaudit.",
+    "button": "Kostenlose Analyse starten",
+    "note": "Keine Kreditkarte erforderlich"
+  },
+  "auth": {
+    "register": {
+      "title": "Von KI-Suche gefunden werden",
+      "subtitle": "Schliessen Sie sich Unternehmen an, die bereits für ChatGPT, Claude und KI-gestützte Suche optimieren.",
+      "benefit1": "Verfolgen Sie Ihre KI-Sichtbarkeit bei ChatGPT, Claude & mehr",
+      "benefit2": "Verwalten Sie Zitierungen in 50+ Verzeichnissen",
+      "benefit3": "Generieren Sie Schema-Markup automatisch",
+      "benefit4": "Erhalten Sie Benachrichtigungen bei KI-Erwähnungsänderungen",
+      "testimonial": "Seit wir GetCitedBy nutzen, empfiehlt ChatGPT uns, wenn nach Treuhändern in Zürich gefragt wird. Das ist unglaublicher ROI.",
+      "testimonialAuthor": "Nicolas B., Brigger Treuhand",
+      "formTitle": "Konto erstellen",
+      "formSubtitle": "Starten Sie mit einem kostenlosen KI-Sichtbarkeitsaudit",
+      "emailLabel": "Geschäftliche E-Mail-Adresse",
+      "emailPlaceholder": "sie@firma.com",
+      "submitButton": "Kostenlos starten",
+      "submitting": "Wird gesendet...",
+      "orContinueWith": "Oder fortfahren mit",
+      "googleButton": "Mit Google fortfahren",
+      "noCardRequired": "Keine Kreditkarte erforderlich. Kostenloser Plan beinhaltet 1 Unternehmen.",
+      "haveAccount": "Bereits ein Konto?",
+      "signIn": "Anmelden",
+      "termsText": "Mit der Registrierung akzeptieren Sie unsere",
+      "termsLink": "AGB",
+      "andText": "und",
+      "privacyLink": "Datenschutzrichtlinie",
+      "errorGeneric": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "errorMagicLink": "Magic Link konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    },
+    "login": {
+      "title": "Willkommen zurück",
+      "subtitle": "Melden Sie sich bei Ihrem GetCitedBy-Konto an",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "sie@firma.com",
+      "submitButton": "Magic Link senden",
+      "submitting": "Wird gesendet...",
+      "orContinueWith": "Oder fortfahren mit",
+      "googleButton": "Mit Google fortfahren",
+      "noAccount": "Noch kein Konto?",
+      "signUp": "Registrieren",
+      "errorGeneric": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      "errorMagicLink": "Magic Link konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    },
+    "verify": {
+      "title": "E-Mail überprüfen",
+      "subtitle": "Wir haben einen Magic Link gesendet an",
+      "instruction": "Klicken Sie auf den Link in der E-Mail, um sich anzumelden.",
+      "spamNote": "Nicht gefunden? Überprüfen Sie Ihren Spam-Ordner.",
+      "resendButton": "Magic Link erneut senden",
+      "backToLogin": "Zurück zur Anmeldung"
+    }
+  },
+  "footer": {
+    "description": "Wir helfen Schweizer Unternehmen, von KI-Assistenten entdeckt und empfohlen zu werden.",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "legal": "Rechtliches",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "api": "API",
+    "about": "\u00dcber uns",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "imprint": "Impressum",
+    "copyright": "GetCitedBy. Alle Rechte vorbehalten.",
+    "madeIn": "Mit Sorgfalt in der Schweiz entwickelt"
+  }
+}

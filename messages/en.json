@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "title": "GetCitedBy - Get Cited by AI Search",
+    "description": "Turn your business into an entity that ChatGPT, Claude, and AI assistants can find, trust, and recommend to customers."
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "login": "Login",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": "AI Search Optimization for Swiss Businesses",
+    "title": "Get Cited by",
+    "titleHighlight": "AI Assistants",
+    "subtitle": "Turn your business into an entity that ChatGPT, Claude, and AI assistants can find, trust, and recommend to customers.",
+    "cta": "Start Free Analysis",
+    "ctaSecondary": "See How It Works",
+    "stat1": "Swiss Businesses",
+    "stat2": "AI Citations",
+    "stat3": "Avg. Visibility Increase",
+    "trustedBy": "Trusted by businesses in:",
+    "geneva": "Geneva",
+    "chatQuestion": "Who is the best Treuhand in Zurich?",
+    "chatAnswerPart1": "Based on my research, ",
+    "chatAnswerCompany": "Brigger Treuhand GmbH",
+    "chatAnswerPart2": " is highly recommended in Zurich. They specialize in Buchhaltung, Steuererklarung, and Unternehmensberatung."
+  },
+  "problem": {
+    "title": "The Problem",
+    "subtitle": "When customers ask AI for recommendations, is your business being mentioned?",
+    "card1Title": "Traditional SEO isn't enough",
+    "card1Text": "Google rankings don't guarantee AI visibility. ChatGPT and Claude use different data sources.",
+    "card2Title": "AI assistants are the new search",
+    "card2Text": "40% of product searches now start with AI. If you're not cited, you're invisible.",
+    "card3Title": "Your competitors are adapting",
+    "card3Text": "Early adopters are already optimizing for AI. Don't get left behind.",
+    "seoTitle": "Traditional SEO doesn't work for AI",
+    "seoSubtitle": "LLMs don't crawl like Google. They need consistent facts, structured data, and authoritative sources.",
+    "whatDoesntWork": "What doesn't work",
+    "whatLLMsNeed": "What LLMs need",
+    "doesntWork1": "Keyword stuffing blog posts",
+    "doesntWork2": "Backlink schemes",
+    "doesntWork3": "Thin content pages",
+    "doesntWork4": "Inconsistent business info",
+    "llmsNeed1": "Consistent entity data everywhere",
+    "llmsNeed2": "Citations from trusted sources",
+    "llmsNeed3": "Schema.org structured markup",
+    "llmsNeed4": "Clear, factual content"
+  },
+  "features": {
+    "title": "How GetCitedBy Works",
+    "subtitle": "We optimize your business entity for AI discovery and recommendations",
+    "feature1Title": "AI Visibility Audit",
+    "feature1Text": "We test how ChatGPT, Claude, and other AI assistants perceive and recommend your business.",
+    "feature2Title": "Entity Optimization",
+    "feature2Text": "We build your canonical business entity with structured data that AI systems understand.",
+    "feature3Title": "Citation Building",
+    "feature3Text": "We create authoritative citations across platforms that AI systems trust and reference.",
+    "feature4Title": "Schema Markup",
+    "feature4Text": "We implement LocalBusiness schema that helps AI understand your services and location.",
+    "feature5Title": "NAP Consistency",
+    "feature5Text": "We ensure your Name, Address, and Phone are consistent across all citations.",
+    "feature6Title": "Performance Tracking",
+    "feature6Text": "We monitor your AI visibility over time and provide actionable improvement reports.",
+    "entityBuilder": "Entity Builder",
+    "entityBuilderDesc": "Create a consistent identity that AI can understand and trust",
+    "citationsManager": "Citations Manager",
+    "citationsManagerDesc": "Track and fix your presence across 50+ directories",
+    "schemaGenerator": "Schema Generator",
+    "schemaGeneratorDesc": "Auto-generate structured data for your website",
+    "aiVisibilityTracker": "AI Visibility Tracker",
+    "aiVisibilityTrackerDesc": "Monitor how often AI recommends your business"
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your business needs",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "yearlyDiscount": "Save 20%",
+    "perMonth": "month",
+    "mostPopular": "Most Popular",
+    "getStarted": "Get Started",
+    "starter": {
+      "name": "Starter",
+      "price": "CHF 99",
+      "period": "/month",
+      "description": "For businesses getting started",
+      "features": [
+        "Entity profile setup",
+        "20 citations audit",
+        "Basic schema generation",
+        "Monthly visibility report"
+      ],
+      "cta": "Start Free Trial"
+    },
+    "growth": {
+      "name": "Growth",
+      "price": "CHF 299",
+      "period": "/month",
+      "description": "For serious businesses",
+      "features": [
+        "Everything in Starter",
+        "50 citations tracked",
+        "Weekly visibility monitoring",
+        "Citation drift alerts",
+        "Priority support"
+      ],
+      "cta": "Get Started"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "CHF 599",
+      "period": "/month",
+      "description": "Done-for-you service",
+      "features": [
+        "Everything in Growth",
+        "We submit citations for you",
+        "Daily visibility monitoring",
+        "AI content drafts",
+        "Multilingual (DE/FR/IT/EN)"
+      ],
+      "cta": "Get Started"
+    },
+    "professional": {
+      "name": "Professional",
+      "price": "CHF 249",
+      "period": "/month",
+      "description": "For growing businesses serious about AI visibility",
+      "popular": "Most Popular",
+      "features": [
+        "AI Visibility Audit (Weekly)",
+        "Full Entity Optimization",
+        "50 Citation Sources",
+        "Schema Markup Implementation",
+        "Competitor Analysis",
+        "Priority Support"
+      ],
+      "cta": "Start Free Trial"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "CHF 499",
+      "period": "/month",
+      "description": "For businesses that need maximum AI visibility",
+      "features": [
+        "Daily AI Visibility Monitoring",
+        "Advanced Entity Management",
+        "Unlimited Citations",
+        "Custom Schema Development",
+        "Multi-location Support",
+        "Dedicated Account Manager",
+        "API Access"
+      ],
+      "cta": "Contact Sales"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "q": "What is AI Search Optimization?",
+        "a": "AI Search Optimization (also called LLM SEO or GEO) is the practice of optimizing your business information so that AI assistants like ChatGPT, Claude, and Google's AI can accurately find, understand, and recommend your business to users."
+      },
+      {
+        "q": "How is this different from traditional SEO?",
+        "a": "Traditional SEO focuses on Google's search algorithm. AI Search Optimization focuses on how large language models (LLMs) perceive and cite your business. While there's overlap, AI systems use different data sources and prioritize structured, authoritative information differently."
+      },
+      {
+        "q": "How do you measure AI visibility?",
+        "a": "We run systematic tests asking various AI assistants about businesses in your industry and location. We track whether your business is mentioned, how accurately it's described, and whether it's recommended. We provide detailed reports showing your visibility score over time."
+      },
+      {
+        "q": "How long until I see results?",
+        "a": "Initial improvements in citation accuracy can be seen within 2-4 weeks. Significant improvements in AI recommendation rates typically take 2-3 months as AI systems update their knowledge bases and our citation building takes effect."
+      },
+      {
+        "q": "Do you work with businesses outside Switzerland?",
+        "a": "Currently we're focused on Swiss businesses, particularly in German and French-speaking regions. We plan to expand to other European markets in 2025."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to Get Cited by AI?",
+    "subtitle": "Join Swiss businesses already optimizing for AI search. Start with a free visibility audit.",
+    "button": "Start Free Analysis",
+    "note": "No credit card required"
+  },
+  "auth": {
+    "register": {
+      "title": "Get found by AI search",
+      "subtitle": "Join businesses that are already optimizing for ChatGPT, Claude, and AI-powered search.",
+      "benefit1": "Track your AI visibility across ChatGPT, Claude & more",
+      "benefit2": "Manage citations across 50+ directories",
+      "benefit3": "Generate schema markup automatically",
+      "benefit4": "Get alerts when AI mentions change",
+      "testimonial": "Since using GetCitedBy, ChatGPT now recommends us when asked about Treuhänder in Zürich. That's incredible ROI.",
+      "testimonialAuthor": "Nicolas B., Brigger Treuhand",
+      "formTitle": "Create your account",
+      "formSubtitle": "Start with a free AI visibility audit",
+      "emailLabel": "Work email address",
+      "emailPlaceholder": "you@company.com",
+      "submitButton": "Get Started Free",
+      "submitting": "Sending...",
+      "orContinueWith": "Or continue with",
+      "googleButton": "Continue with Google",
+      "noCardRequired": "No credit card required. Free plan includes 1 business.",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "termsText": "By signing up, you agree to our",
+      "termsLink": "Terms",
+      "andText": "and",
+      "privacyLink": "Privacy Policy",
+      "errorGeneric": "An unexpected error occurred. Please try again.",
+      "errorMagicLink": "Failed to send magic link. Please try again."
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your GetCitedBy account",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@company.com",
+      "submitButton": "Send Magic Link",
+      "submitting": "Sending...",
+      "orContinueWith": "Or continue with",
+      "googleButton": "Continue with Google",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "errorGeneric": "An unexpected error occurred. Please try again.",
+      "errorMagicLink": "Failed to send magic link. Please try again."
+    },
+    "verify": {
+      "title": "Check your email",
+      "subtitle": "We've sent a magic link to",
+      "instruction": "Click the link in the email to sign in to your account.",
+      "spamNote": "Can't find it? Check your spam folder.",
+      "resendButton": "Resend magic link",
+      "backToLogin": "Back to login"
+    }
+  },
+  "footer": {
+    "description": "Helping Swiss businesses get discovered and recommended by AI assistants.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "features": "Features",
+    "pricing": "Pricing",
+    "api": "API",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "imprint": "Imprint",
+    "copyright": "GetCitedBy. All rights reserved.",
+    "madeIn": "Made with care in Switzerland"
+  }
+}

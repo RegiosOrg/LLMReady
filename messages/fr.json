@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "title": "GetCitedBy - Soyez cit\u00e9 par la recherche IA",
+    "description": "Transformez votre entreprise en une entit\u00e9 que ChatGPT, Claude et les assistants IA peuvent trouver, faire confiance et recommander aux clients."
+  },
+  "nav": {
+    "features": "Fonctionnalit\u00e9s",
+    "pricing": "Tarifs",
+    "faq": "FAQ",
+    "login": "Connexion",
+    "getStarted": "Commencer"
+  },
+  "hero": {
+    "badge": "Optimisation IA pour les entreprises suisses",
+    "title": "Soyez cité par les",
+    "titleHighlight": "Assistants IA",
+    "subtitle": "Transformez votre entreprise en une entité que ChatGPT, Claude et les assistants IA peuvent trouver, faire confiance et recommander aux clients.",
+    "cta": "Analyse gratuite",
+    "ctaSecondary": "Comment ça marche",
+    "stat1": "Entreprises suisses",
+    "stat2": "Citations IA",
+    "stat3": "Augmentation moyenne de visibilité",
+    "trustedBy": "Fait confiance par des entreprises à:",
+    "geneva": "Genève",
+    "chatQuestion": "Qui est le meilleur fiduciaire à Zurich?",
+    "chatAnswerPart1": "Selon mes recherches, ",
+    "chatAnswerCompany": "Brigger Treuhand GmbH",
+    "chatAnswerPart2": " est hautement recommandé à Zurich. Ils se spécialisent dans la comptabilité, les déclarations fiscales et le conseil aux entreprises."
+  },
+  "problem": {
+    "title": "Le Problème",
+    "subtitle": "Quand les clients demandent des recommandations à l'IA, votre entreprise est-elle mentionnée?",
+    "card1Title": "Le SEO traditionnel ne suffit plus",
+    "card1Text": "Les classements Google ne garantissent pas la visibilité IA. ChatGPT et Claude utilisent des sources de données différentes.",
+    "card2Title": "Les assistants IA sont la nouvelle recherche",
+    "card2Text": "40% des recherches de produits commencent maintenant par l'IA. Si vous n'êtes pas cité, vous êtes invisible.",
+    "card3Title": "Vos concurrents s'adaptent",
+    "card3Text": "Les premiers adoptants optimisent déjà pour l'IA. Ne vous laissez pas distancer.",
+    "seoTitle": "Le SEO traditionnel ne fonctionne pas pour l'IA",
+    "seoSubtitle": "Les LLM ne crawlent pas comme Google. Ils ont besoin de faits cohérents, de données structurées et de sources fiables.",
+    "whatDoesntWork": "Ce qui ne fonctionne pas",
+    "whatLLMsNeed": "Ce dont les LLM ont besoin",
+    "doesntWork1": "Bourrage de mots-clés dans les articles",
+    "doesntWork2": "Schémas de backlinks",
+    "doesntWork3": "Pages à contenu mince",
+    "doesntWork4": "Informations commerciales incohérentes",
+    "llmsNeed1": "Données d'entité cohérentes partout",
+    "llmsNeed2": "Citations de sources fiables",
+    "llmsNeed3": "Balisage structuré Schema.org",
+    "llmsNeed4": "Contenu clair et factuel"
+  },
+  "features": {
+    "title": "Comment fonctionne GetCitedBy",
+    "subtitle": "Nous optimisons votre entité commerciale pour la découverte et les recommandations IA",
+    "feature1Title": "Audit de visibilité IA",
+    "feature1Text": "Nous testons comment ChatGPT, Claude et autres assistants IA perçoivent et recommandent votre entreprise.",
+    "feature2Title": "Optimisation d'entité",
+    "feature2Text": "Nous construisons votre entité commerciale canonique avec des données structurées que les systèmes IA comprennent.",
+    "feature3Title": "Construction de citations",
+    "feature3Text": "Nous créons des citations autoritaires sur les plateformes auxquelles les systèmes IA font confiance.",
+    "feature4Title": "Balisage Schema",
+    "feature4Text": "Nous implémentons le schema LocalBusiness qui aide l'IA à comprendre vos services et votre emplacement.",
+    "feature5Title": "Cohérence NAP",
+    "feature5Text": "Nous assurons que votre Nom, Adresse et Téléphone sont cohérents sur toutes les citations.",
+    "feature6Title": "Suivi des performances",
+    "feature6Text": "Nous surveillons votre visibilité IA et fournissons des rapports d'amélioration exploitables.",
+    "entityBuilder": "Constructeur d'entité",
+    "entityBuilderDesc": "Créez une identité cohérente que l'IA peut comprendre et à laquelle elle peut faire confiance",
+    "citationsManager": "Gestionnaire de citations",
+    "citationsManagerDesc": "Suivez et corrigez votre présence sur plus de 50 annuaires",
+    "schemaGenerator": "Générateur de schéma",
+    "schemaGeneratorDesc": "Génération automatique de données structurées pour votre site",
+    "aiVisibilityTracker": "Suivi de visibilité IA",
+    "aiVisibilityTrackerDesc": "Surveillez la fréquence à laquelle l'IA recommande votre entreprise"
+  },
+  "pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Choisissez le plan qui correspond à vos besoins",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "yearlyDiscount": "Économisez 20%",
+    "perMonth": "mois",
+    "mostPopular": "Le plus populaire",
+    "getStarted": "Commencer",
+    "starter": {
+      "name": "Starter",
+      "price": "CHF 99",
+      "period": "/mois",
+      "description": "Pour les entreprises qui débutent",
+      "features": [
+        "Configuration du profil d'entité",
+        "Audit de 20 citations",
+        "Génération de schéma de base",
+        "Rapport de visibilité mensuel"
+      ],
+      "cta": "Essai gratuit"
+    },
+    "growth": {
+      "name": "Growth",
+      "price": "CHF 299",
+      "period": "/mois",
+      "description": "Pour les entreprises sérieuses",
+      "features": [
+        "Tout dans Starter",
+        "50 citations suivies",
+        "Surveillance hebdomadaire de la visibilité",
+        "Alertes de dérive des citations",
+        "Support prioritaire"
+      ],
+      "cta": "Commencer"
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "CHF 599",
+      "period": "/mois",
+      "description": "Service clé en main",
+      "features": [
+        "Tout dans Growth",
+        "Nous soumettons les citations pour vous",
+        "Surveillance quotidienne de la visibilité",
+        "Brouillons de contenu IA",
+        "Multilingue (DE/FR/IT/EN)"
+      ],
+      "cta": "Commencer"
+    },
+    "professional": {
+      "name": "Professional",
+      "price": "CHF 249",
+      "period": "/mois",
+      "description": "Pour les entreprises en croissance sérieuses sur la visibilité IA",
+      "popular": "Le plus populaire",
+      "features": [
+        "Audit de visibilité IA (Hebdomadaire)",
+        "Optimisation complète d'entité",
+        "50 sources de citations",
+        "Implémentation Schema Markup",
+        "Analyse concurrentielle",
+        "Support prioritaire"
+      ],
+      "cta": "Essai gratuit"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "CHF 499",
+      "period": "/mois",
+      "description": "Pour les entreprises qui ont besoin d'une visibilité IA maximale",
+      "features": [
+        "Surveillance quotidienne de visibilité IA",
+        "Gestion avancée d'entité",
+        "Citations illimitées",
+        "Développement de schema personnalisé",
+        "Support multi-sites",
+        "Gestionnaire de compte dédié",
+        "Accès API"
+      ],
+      "cta": "Contacter les ventes"
+    }
+  },
+  "faq": {
+    "title": "Questions fr\u00e9quentes",
+    "questions": [
+      {
+        "q": "Qu'est-ce que l'optimisation pour la recherche IA?",
+        "a": "L'optimisation pour la recherche IA (aussi appel\u00e9e LLM SEO ou GEO) est la pratique d'optimiser les informations de votre entreprise pour que les assistants IA comme ChatGPT, Claude et l'IA de Google puissent trouver, comprendre et recommander votre entreprise aux utilisateurs."
+      },
+      {
+        "q": "En quoi est-ce diff\u00e9rent du SEO traditionnel?",
+        "a": "Le SEO traditionnel se concentre sur l'algorithme de recherche de Google. L'optimisation IA se concentre sur la fa\u00e7on dont les grands mod\u00e8les de langage (LLM) per\u00e7oivent et citent votre entreprise. Bien qu'il y ait des chevauchements, les syst\u00e8mes IA utilisent diff\u00e9rentes sources de donn\u00e9es et priorisent diff\u00e9remment les informations structur\u00e9es et autoritaires."
+      },
+      {
+        "q": "Comment mesurez-vous la visibilit\u00e9 IA?",
+        "a": "Nous effectuons des tests syst\u00e9matiques en demandant \u00e0 divers assistants IA des informations sur les entreprises de votre secteur et r\u00e9gion. Nous suivons si votre entreprise est mentionn\u00e9e, avec quelle pr\u00e9cision elle est d\u00e9crite et si elle est recommand\u00e9e. Nous fournissons des rapports d\u00e9taill\u00e9s montrant votre score de visibilit\u00e9 au fil du temps."
+      },
+      {
+        "q": "Combien de temps avant de voir des r\u00e9sultats?",
+        "a": "Les premi\u00e8res am\u00e9liorations de pr\u00e9cision des citations peuvent \u00eatre observ\u00e9es en 2-4 semaines. Des am\u00e9liorations significatives des taux de recommandation IA prennent g\u00e9n\u00e9ralement 2-3 mois, le temps que les syst\u00e8mes IA mettent \u00e0 jour leurs bases de connaissances et que notre construction de citations prenne effet."
+      },
+      {
+        "q": "Travaillez-vous avec des entreprises hors de Suisse?",
+        "a": "Actuellement, nous nous concentrons sur les entreprises suisses, particuli\u00e8rement dans les r\u00e9gions germanophones et francophones. Nous pr\u00e9voyons de nous \u00e9tendre \u00e0 d'autres march\u00e9s europ\u00e9ens en 2025."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Pr\u00eat \u00e0 \u00eatre cit\u00e9 par l'IA?",
+    "subtitle": "Rejoignez les entreprises suisses qui optimisent d\u00e9j\u00e0 pour la recherche IA. Commencez par un audit de visibilit\u00e9 gratuit.",
+    "button": "Analyse gratuite",
+    "note": "Aucune carte de cr\u00e9dit requise"
+  },
+  "auth": {
+    "register": {
+      "title": "Soyez trouvé par la recherche IA",
+      "subtitle": "Rejoignez les entreprises qui optimisent déjà pour ChatGPT, Claude et la recherche IA.",
+      "benefit1": "Suivez votre visibilité IA sur ChatGPT, Claude et plus",
+      "benefit2": "Gérez vos citations sur plus de 50 annuaires",
+      "benefit3": "Générez automatiquement le balisage schema",
+      "benefit4": "Recevez des alertes quand les mentions IA changent",
+      "testimonial": "Depuis que nous utilisons GetCitedBy, ChatGPT nous recommande quand on lui demande des fiduciaires à Zurich. C'est un ROI incroyable.",
+      "testimonialAuthor": "Nicolas B., Brigger Treuhand",
+      "formTitle": "Créer votre compte",
+      "formSubtitle": "Commencez avec un audit de visibilité IA gratuit",
+      "emailLabel": "Adresse email professionnelle",
+      "emailPlaceholder": "vous@entreprise.com",
+      "submitButton": "Commencer gratuitement",
+      "submitting": "Envoi en cours...",
+      "orContinueWith": "Ou continuer avec",
+      "googleButton": "Continuer avec Google",
+      "noCardRequired": "Aucune carte de crédit requise. Le plan gratuit inclut 1 entreprise.",
+      "haveAccount": "Vous avez déjà un compte?",
+      "signIn": "Se connecter",
+      "termsText": "En vous inscrivant, vous acceptez nos",
+      "termsLink": "CGV",
+      "andText": "et",
+      "privacyLink": "Politique de confidentialité",
+      "errorGeneric": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      "errorMagicLink": "Échec de l'envoi du lien magique. Veuillez réessayer."
+    },
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous à votre compte GetCitedBy",
+      "emailLabel": "Adresse email",
+      "emailPlaceholder": "vous@entreprise.com",
+      "submitButton": "Envoyer le lien magique",
+      "submitting": "Envoi en cours...",
+      "orContinueWith": "Ou continuer avec",
+      "googleButton": "Continuer avec Google",
+      "noAccount": "Vous n'avez pas de compte?",
+      "signUp": "S'inscrire",
+      "errorGeneric": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      "errorMagicLink": "Échec de l'envoi du lien magique. Veuillez réessayer."
+    },
+    "verify": {
+      "title": "Vérifiez votre email",
+      "subtitle": "Nous avons envoyé un lien magique à",
+      "instruction": "Cliquez sur le lien dans l'email pour vous connecter.",
+      "spamNote": "Vous ne le trouvez pas? Vérifiez votre dossier spam.",
+      "resendButton": "Renvoyer le lien magique",
+      "backToLogin": "Retour à la connexion"
+    }
+  },
+  "footer": {
+    "description": "Nous aidons les entreprises suisses \u00e0 \u00eatre d\u00e9couvertes et recommand\u00e9es par les assistants IA.",
+    "product": "Produit",
+    "company": "Entreprise",
+    "legal": "L\u00e9gal",
+    "features": "Fonctionnalit\u00e9s",
+    "pricing": "Tarifs",
+    "api": "API",
+    "about": "\u00c0 propos",
+    "blog": "Blog",
+    "contact": "Contact",
+    "privacy": "Confidentialit\u00e9",
+    "terms": "CGV",
+    "imprint": "Mentions l\u00e9gales",
+    "copyright": "GetCitedBy. Tous droits r\u00e9serv\u00e9s.",
+    "madeIn": "Con\u00e7u avec soin en Suisse"
+  }
+}
