@@ -58,8 +58,13 @@ function LoginForm() {
     setIsGoogleLoading(true)
     setError(null)
 
+    console.log('Starting Google Sign-In...')
+    console.log('auth:', auth)
+    console.log('googleProvider:', googleProvider)
+
     try {
       if (!auth || !googleProvider) {
+        console.error('Firebase not initialized - auth:', !!auth, 'googleProvider:', !!googleProvider)
         setError(t('errorGeneric'))
         return
       }

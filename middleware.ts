@@ -34,7 +34,7 @@ const authMiddleware = withAuth(
         const pathnameWithoutLocale = pathname.replace(/^\/(en|de|fr)/, '') || '/'
 
         // API routes that are public
-        const publicApiRoutes = ['/api/auth', '/api/billing/webhook']
+        const publicApiRoutes = ['/api/auth', '/api/billing/webhook', '/api/audit']
 
         // Check if current path is public
         if (publicRoutes.includes(pathnameWithoutLocale)) {
