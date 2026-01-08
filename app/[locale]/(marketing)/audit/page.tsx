@@ -184,6 +184,7 @@ export default function AuditPage() {
           businessName,
           city,
           industry: industryValue,
+          locale, // Send current locale for German/French prompts
         }),
       })
 
@@ -653,7 +654,7 @@ export default function AuditPage() {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" onClick={downloadPDF} disabled={downloading} className="border-gray-300">
+                <Button size="lg" onClick={downloadPDF} disabled={downloading} className="bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 hover:border-gray-400">
                   {downloading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />

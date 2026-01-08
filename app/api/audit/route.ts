@@ -45,6 +45,32 @@ interface AuditRequest {
   businessName: string
   city: string
   industry: string
+  locale?: string
+}
+
+// Localized prompts
+const PROMPTS = {
+  de: {
+    local_search: (industry: string, city: string) =>
+      `Ich suche einen ${industry} in ${city}, Schweiz. Kannst du mir einige Optionen empfehlen?`,
+    direct_query: (businessName: string, city: string) =>
+      `Was kannst du mir über ${businessName} in ${city}, Schweiz sagen?`,
+    system: 'Du bist ein hilfreicher Assistent, der Informationen über lokale Unternehmen in der Schweiz bereitstellt. Sei spezifisch und sachlich. Wenn du keine Informationen über ein bestimmtes Unternehmen hast, sage das klar, anstatt Informationen zu erfinden.',
+  },
+  fr: {
+    local_search: (industry: string, city: string) =>
+      `Je cherche un ${industry} à ${city}, Suisse. Pouvez-vous me recommander quelques options?`,
+    direct_query: (businessName: string, city: string) =>
+      `Que pouvez-vous me dire sur ${businessName} à ${city}, Suisse?`,
+    system: 'Vous êtes un assistant utile qui fournit des informations sur les entreprises locales en Suisse. Soyez spécifique et factuel. Si vous n\'avez pas d\'informations sur une entreprise spécifique, dites-le clairement plutôt que d\'inventer des informations.',
+  },
+  en: {
+    local_search: (industry: string, city: string) =>
+      `I need a ${industry} in ${city}, Switzerland. Can you recommend some options?`,
+    direct_query: (businessName: string, city: string) =>
+      `What can you tell me about ${businessName} in ${city}, Switzerland?`,
+    system: 'You are a helpful assistant that provides information about local businesses in Switzerland. Be specific and factual. If you don\'t have information about a specific business, clearly say so rather than making up information.',
+  },
 }
 
 interface AuditResult {
@@ -68,7 +94,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body: AuditRequest = await req.json()
-    const { businessName, city, industry } = body
+    const { businessName, city, industry, locale = 'de' } = body
 
     // Validation
     if (!businessName || !city || !industry) {
@@ -78,15 +104,19 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Get localized prompts (default to German)
+    const lang = (locale in PROMPTS ? locale : 'de') as keyof typeof PROMPTS
+    const localizedPrompts = PROMPTS[lang]
+
     // Run 2 visibility checks with OpenAI
     const prompts = [
       {
         type: 'local_search' as const,
-        prompt: `I need a ${industry} in ${city}, Switzerland. Can you recommend some options?`,
+        prompt: localizedPrompts.local_search(industry, city),
       },
       {
         type: 'direct_query' as const,
-        prompt: `What can you tell me about ${businessName} in ${city}, Switzerland?`,
+        prompt: localizedPrompts.direct_query(businessName, city),
       },
     ]
 
@@ -99,7 +129,7 @@ export async function POST(req: NextRequest) {
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful assistant that provides information about local businesses in Switzerland. Be specific and factual. If you don\'t have information about a specific business, clearly say so rather than making up information.',
+              content: localizedPrompts.system,
             },
             {
               role: 'user',

@@ -18,6 +18,7 @@ const publicRoutes = [
   '/privacy',
   '/terms',
   '/audit',
+  '/visibility',
 ]
 
 // Create the auth middleware
