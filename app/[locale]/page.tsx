@@ -282,59 +282,61 @@ export default async function LandingPage({ params: { locale } }: PageProps) {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
+            {/* Free/Starter Plan */}
             <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-100/50">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricing.starter.name')}</h3>
-              <p className="text-gray-500 mb-6">{t('pricing.starter.description')}</p>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricingPage.plans.free.name')}</h3>
+              <p className="text-gray-500 mb-6">{t('pricingPage.plans.free.description')}</p>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-gray-900">{t('pricingPage.free')}</span>
+              </div>
+              <ul className="space-y-3 mb-8 text-gray-600">
+                {(t.raw('pricingPage.plans.free.features') as string[]).map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <Link href={localePath('/register')} className="block w-full py-3 text-center border-2 border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">{t('pricingPage.plans.free.cta')}</Link>
+            </div>
+
+            {/* Professional Plan - Most Popular */}
+            <div className="bg-gradient-to-b from-white to-purple-50 border-2 border-purple-200 rounded-2xl p-8 relative shadow-xl shadow-purple-100/50 scale-105">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white text-sm font-semibold px-4 py-1.5 rounded-full shadow-lg">{t('pricingPage.mostPopular')}</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricingPage.plans.professional.name')}</h3>
+              <p className="text-gray-500 mb-6">{t('pricingPage.plans.professional.description')}</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gray-900">CHF 149</span>
-                <span className="text-gray-500">/{t('pricing.perMonth')}</span>
+                <span className="text-gray-500">/{t('pricingPage.mo')}</span>
               </div>
               <ul className="space-y-3 mb-8 text-gray-600">
-                {(t.raw('pricing.starter.features') as string[]).map((feature, i) => (
+                {(t.raw('pricingPage.plans.professional.features') as string[]).map((feature, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <Link href={localePath('/register')} className="block w-full py-3 text-center border-2 border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">{t('pricing.getStarted')}</Link>
+              <Link href={localePath('/register')} className="block w-full py-3 text-center bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl hover:opacity-90 transition font-semibold shadow-lg">{t('pricingPage.plans.professional.cta')}</Link>
             </div>
 
-            <div className="bg-gradient-to-b from-white to-purple-50 border-2 border-purple-200 rounded-2xl p-8 relative shadow-xl shadow-purple-100/50 scale-105">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white text-sm font-semibold px-4 py-1.5 rounded-full shadow-lg">{t('pricing.mostPopular')}</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricing.growth.name')}</h3>
-              <p className="text-gray-500 mb-6">{t('pricing.growth.description')}</p>
+            {/* Business Plan */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-100/50">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricingPage.plans.business.name')}</h3>
+              <p className="text-gray-500 mb-6">{t('pricingPage.plans.business.description')}</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-gray-900">CHF 299</span>
-                <span className="text-gray-500">/{t('pricing.perMonth')}</span>
+                <span className="text-gray-500">/{t('pricingPage.mo')}</span>
               </div>
               <ul className="space-y-3 mb-8 text-gray-600">
-                {(t.raw('pricing.growth.features') as string[]).map((feature, i) => (
+                {(t.raw('pricingPage.plans.business.features') as string[]).map((feature, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <Link href={localePath('/register')} className="block w-full py-3 text-center bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl hover:opacity-90 transition font-semibold shadow-lg">{t('pricing.getStarted')}</Link>
-            </div>
-
-            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg shadow-gray-100/50">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{t('pricing.pro.name')}</h3>
-              <p className="text-gray-500 mb-6">{t('pricing.pro.description')}</p>
-              <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">CHF 599</span>
-                <span className="text-gray-500">/{t('pricing.perMonth')}</span>
-              </div>
-              <ul className="space-y-3 mb-8 text-gray-600">
-                {(t.raw('pricing.pro.features') as string[]).map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <svg className="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Link href={localePath('/register')} className="block w-full py-3 text-center border-2 border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">{t('pricing.getStarted')}</Link>
+              <Link href={localePath('/register')} className="block w-full py-3 text-center border-2 border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition font-medium">{t('pricingPage.plans.business.cta')}</Link>
             </div>
           </div>
         </div>

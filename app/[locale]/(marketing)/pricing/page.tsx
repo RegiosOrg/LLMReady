@@ -10,8 +10,8 @@ const PLAN_KEYS = ['free', 'professional', 'business'] as const
 
 const planConfig = {
   free: { key: 'FREE', icon: Zap, price: { monthly: 0, yearly: 0 }, popular: false },
-  professional: { key: 'PROFESSIONAL', icon: Building, price: { monthly: 29, yearly: 290 }, popular: true },
-  business: { key: 'BUSINESS', icon: Rocket, price: { monthly: 79, yearly: 790 }, popular: false },
+  professional: { key: 'PROFESSIONAL', icon: Building, price: { monthly: 149, yearly: 1490 }, popular: true },
+  business: { key: 'BUSINESS', icon: Rocket, price: { monthly: 299, yearly: 2990 }, popular: false },
 }
 
 export default function PricingPage() {
@@ -181,11 +181,11 @@ export default function PricingPage() {
 
                 <div className="text-center mb-6">
                   <span className="text-5xl font-bold text-gray-900">
-                    ${config.price[interval]}
+                    {config.price[interval] === 0 ? t('pricingPage.free') : `CHF ${config.price[interval]}`}
                   </span>
                   {config.price[interval] > 0 && (
                     <span className="text-gray-500 ml-1">
-                      /{interval === 'monthly' ? 'mo' : 'yr'}
+                      /{interval === 'monthly' ? t('pricingPage.mo') : t('pricingPage.yr')}
                     </span>
                   )}
                 </div>

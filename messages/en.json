@@ -302,6 +302,9 @@
     "savePercent": "Save 17%",
     "mostPopular": "Most Popular",
     "freeAudit": "Free Audit",
+    "free": "Free",
+    "mo": "mo",
+    "yr": "yr",
     "enterprise": {
       "title": "Need more? Contact us for Enterprise",
       "subtitle": "Unlimited businesses, custom integrations, dedicated support, and SLA guarantees.",
