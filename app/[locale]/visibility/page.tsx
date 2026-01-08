@@ -290,8 +290,8 @@ export default function VisibilityPage() {
           </h2>
 
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Wenn ein potenzieller Kunde ChatGPT fragt "Empfehle mir einen {benchmark.industryDE.split(' ')[0]} in Zürich"
-            — erscheinen Sie in der Antwort?
+            Wenn ein potenzieller Kunde ChatGPT fragt: «Empfiehl mir einen guten {benchmark.industryDE.split(' ')[0]} in Zürich»
+            — erscheint Ihr Unternehmen in der Antwort?
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
