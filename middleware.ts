@@ -59,10 +59,10 @@ const authMiddleware = withAuth(
 export default function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
 
-  // Skip middleware for static files and API auth routes
+  // Skip middleware for static files and ALL API routes
   if (
     pathname.startsWith('/_next') ||
-    pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api') ||
     pathname.includes('.') // static files
   ) {
     return NextResponse.next()
