@@ -64,11 +64,37 @@ function StatCard({ value, label, accent = false }: { value: string; label: stri
   )
 }
 
+// Priority industries to show first (most common B2B targets)
+const PRIORITY_INDUSTRIES = [
+  'Treuhand',
+  'Rechtsanwalt',
+  'Zahnarzt',
+  'Immobilien',
+  'Restaurant',
+  'Hotel',
+  'Auto',
+  'IT',
+  'Handwerk',
+  'Architekt',
+  'Versicherung',
+  'Arzt',
+]
+
 export default function VisibilityPage() {
   const params = useParams()
   const locale = params?.locale as string || 'de'
   const [selectedIndustry, setSelectedIndustry] = useState('Treuhand')
-  const industries = Object.keys(INDUSTRY_BENCHMARKS)
+  const [showAllIndustries, setShowAllIndustries] = useState(false)
+  const allIndustries = Object.keys(INDUSTRY_BENCHMARKS)
+
+  // Show priority industries first, then the rest
+  const sortedIndustries = [
+    ...PRIORITY_INDUSTRIES.filter(i => allIndustries.includes(i)),
+    ...allIndustries.filter(i => !PRIORITY_INDUSTRIES.includes(i))
+  ]
+
+  const industries = showAllIndustries ? sortedIndustries : sortedIndustries.slice(0, 12)
+  const remainingCount = sortedIndustries.length - 12
   const benchmark = INDUSTRY_BENCHMARKS[selectedIndustry]
 
   // Simulated "your business" for demo
@@ -182,7 +208,7 @@ export default function VisibilityPage() {
         </div>
 
         {/* Industry pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-4">
           {industries.map(industry => (
             <IndustryPill
               key={industry}
@@ -192,6 +218,32 @@ export default function VisibilityPage() {
             />
           ))}
         </div>
+
+        {/* Show more / Show less button */}
+        {remainingCount > 0 && (
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={() => setShowAllIndustries(!showAllIndustries)}
+              className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-purple-600 hover:text-purple-700 hover:bg-purple-50 rounded-full transition-all"
+            >
+              {showAllIndustries ? (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                  </svg>
+                  Weniger anzeigen
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                  {remainingCount} weitere Branchen anzeigen
+                </>
+              )}
+            </button>
+          </div>
+        )}
 
         {/* Industry details */}
         <div className="grid md:grid-cols-2 gap-8">
