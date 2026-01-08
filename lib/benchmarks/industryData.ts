@@ -14,6 +14,7 @@ export interface BusinessBenchmark {
 export interface IndustryBenchmark {
   industry: string
   industryDE: string // German name
+  recommendDE: string // "einen guten Treuhänder", "ein gutes Hotel", etc.
   avgScore: number
   medianScore: number
   topPerformers: BusinessBenchmark[]
@@ -40,6 +41,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Treuhand: {
     industry: 'Treuhand',
     industryDE: 'Treuhand & Buchhaltung',
+    recommendDE: 'einen guten Treuhänder',
     avgScore: 45,
     medianScore: 34,
     topPerformers: [
@@ -56,6 +58,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Rechtsanwalt: {
     industry: 'Rechtsanwalt',
     industryDE: 'Rechtsanwälte & Kanzleien',
+    recommendDE: 'einen guten Anwalt',
     avgScore: 59,
     medianScore: 76,
     topPerformers: [
@@ -71,6 +74,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Zahnarzt: {
     industry: 'Zahnarzt',
     industryDE: 'Zahnärzte & Zahnkliniken',
+    recommendDE: 'einen guten Zahnarzt',
     avgScore: 45,
     medianScore: 28,
     topPerformers: [
@@ -86,6 +90,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Immobilien: {
     industry: 'Immobilien',
     industryDE: 'Immobilien & Makler',
+    recommendDE: 'einen guten Immobilienmakler',
     avgScore: 39,
     medianScore: 28,
     topPerformers: [
@@ -100,6 +105,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Restaurant: {
     industry: 'Restaurant',
     industryDE: 'Restaurants & Gastronomie',
+    recommendDE: 'ein gutes Restaurant',
     avgScore: 53,
     medianScore: 52,
     topPerformers: [
@@ -115,6 +121,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Hotel: {
     industry: 'Hotel',
     industryDE: 'Hotels & Unterkünfte',
+    recommendDE: 'ein gutes Hotel',
     avgScore: 69,
     medianScore: 85,
     topPerformers: [
@@ -130,6 +137,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Auto: {
     industry: 'Auto',
     industryDE: 'Autogaragen & Händler',
+    recommendDE: 'eine gute Autogarage',
     avgScore: 39,
     medianScore: 34,
     topPerformers: [
@@ -144,6 +152,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Versicherung: {
     industry: 'Versicherung',
     industryDE: 'Versicherungen & Vorsorge',
+    recommendDE: 'eine gute Versicherung',
     avgScore: 51,
     medianScore: 34,
     topPerformers: [
@@ -159,6 +168,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   IT: {
     industry: 'IT',
     industryDE: 'IT & Software',
+    recommendDE: 'eine gute IT-Firma',
     avgScore: 43,
     medianScore: 34,
     topPerformers: [
@@ -173,6 +183,7 @@ export const INDUSTRY_BENCHMARKS: Record<string, IndustryBenchmark> = {
   Bau: {
     industry: 'Bau',
     industryDE: 'Bau & Handwerk',
+    recommendDE: 'eine gute Baufirma',
     avgScore: 39,
     medianScore: 28,
     topPerformers: [
