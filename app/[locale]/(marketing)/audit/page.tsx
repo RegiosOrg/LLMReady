@@ -13,30 +13,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Search, Loader2, AlertCircle, CheckCircle2, XCircle, ArrowRight, TrendingUp, Download } from 'lucide-react'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Search, Loader2, AlertCircle, CheckCircle2, XCircle, ArrowRight, TrendingUp, Download, ChevronsUpDown, Check } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
+// Comprehensive list of Swiss cities (alphabetically sorted)
 const SWISS_CITIES = [
-  'Zürich',
-  'Genf',
-  'Basel',
-  'Bern',
-  'Lausanne',
-  'Winterthur',
-  'Luzern',
-  'St. Gallen',
-  'Lugano',
-  'Biel/Bienne',
-  'Thun',
-  'Köniz',
-  'La Chaux-de-Fonds',
-  'Schaffhausen',
-  'Fribourg',
-  'Chur',
-  'Neuchâtel',
-  'Vernier',
-  'Uster',
-  'Sion',
-  'Zug',
+  'Aarau', 'Aarberg', 'Aarburg', 'Adliswil', 'Affoltern am Albis', 'Aigle', 'Allschwil', 'Altdorf', 'Amriswil', 'Appenzell',
+  'Arbon', 'Arlesheim', 'Arosa', 'Arth', 'Ascona', 'Au', 'Aubonne', 'Avenches',
+  'Baden', 'Bad Ragaz', 'Bad Zurzach', 'Basel', 'Bassersdorf', 'Bellinzona', 'Belp', 'Bern', 'Biel/Bienne', 'Binningen', 'Birsfelden', 'Bischofszell', 'Bönigen', 'Brig', 'Brugg', 'Buchs', 'Bülach', 'Bulle', 'Burgdorf',
+  'Carouge', 'Cham', 'Chêne-Bougeries', 'Chiasso', 'Chur', 'Coire', 'Collombey-Muraz', 'Conthey', 'Coppet', 'Crans-Montana',
+  'Davos', 'Delémont', 'Dietikon', 'Dübendorf', 'Düdingen',
+  'Ebikon', 'Ecublens', 'Eglisau', 'Einsiedeln', 'Emmen', 'Engelberg',
+  'Flawil', 'Frauenfeld', 'Freiburg', 'Fribourg', 'Frutigen',
+  'Gams', 'Genf', 'Genève', 'Gland', 'Glarus', 'Gossau', 'Grenchen', 'Grindelwald', 'Gruyères',
+  'Herisau', 'Herzogenbuchsee', 'Hinwil', 'Hochdorf', 'Horgen', 'Horw',
+  'Illnau-Effretikon', 'Interlaken', 'Ittigen',
+  'Jona', 'Jura',
+  'Kloten', 'Köniz', 'Kreuzlingen', 'Kriens', 'Küsnacht', 'Küssnacht',
+  'La Chaux-de-Fonds', 'La Tour-de-Peilz', 'Lachen', 'Lancy', 'Langenthal', 'Laufen', 'Lausanne', 'Lenzburg', 'Leuk', 'Leukerbad', 'Liestal', 'Locarno', 'Luzern', 'Lyss',
+  'Männedorf', 'Martigny', 'Meilen', 'Mels', 'Mendrisio', 'Meyrin', 'Monthey', 'Montreux', 'Morges', 'Moudon', 'Moutier', 'Muri', 'Murten', 'Muttenz',
+  'Näfels', 'Naters', 'Neuchâtel', 'Neuhausen am Rheinfall', 'Nidau', 'Nyon',
+  'Oberriet', 'Oberwil', 'Oftringen', 'Olten', 'Onex', 'Opfikon', 'Orbe', 'Ostermundigen',
+  'Payerne', 'Peseux', 'Pfäffikon', 'Plan-les-Ouates', 'Pontresina', 'Porrentruy', 'Pratteln', 'Prilly', 'Pully',
+  'Rapperswil-Jona', 'Regensdorf', 'Reinach', 'Renens', 'Rheinfelden', 'Richterswil', 'Riehen', 'Rorschach', 'Rüti',
+  'Sargans', 'Sarnen', 'Schaffhausen', 'Schlieren', 'Schwyz', 'Siders', 'Sierre', 'Sion', 'Solothurn', 'Spiez', 'Spreitenbach', 'St. Gallen', 'St. Margrethen', 'St. Moritz', 'Stäfa', 'Stans', 'Steffisburg', 'Stein am Rhein', 'Sursee',
+  'Thalwil', 'Thônex', 'Thun', 'Thusis',
+  'Urdorf', 'Uster', 'Uznach',
+  'Vevey', 'Vernier', 'Visp', 'Volketswil',
+  'Wädenswil', 'Wald', 'Wallisellen', 'Wangen-Brüttisellen', 'Wattwil', 'Weinfelden', 'Wettingen', 'Wetzikon', 'Wil', 'Willisau', 'Winterthur', 'Wohlen',
+  'Yverdon-les-Bains',
+  'Zermatt', 'Zofingen', 'Zollikon', 'Zug', 'Zürich',
 ]
 
 const INDUSTRY_KEYS = [
@@ -79,7 +98,10 @@ export default function AuditPage() {
 
   const [businessName, setBusinessName] = useState('')
   const [city, setCity] = useState('')
+  const [cityOpen, setCityOpen] = useState(false)
+  const [citySearch, setCitySearch] = useState('')
   const [industry, setIndustry] = useState('')
+  const [customIndustry, setCustomIndustry] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloading, setDownloading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -127,13 +149,18 @@ export default function AuditPage() {
     setLoading(true)
 
     try {
+      // Use custom industry text if "other" is selected, otherwise use translated industry name
+      const industryValue = industry === 'other' && customIndustry
+        ? customIndustry
+        : t(`audit.industries.${industry}`)
+
       const response = await fetch('/api/audit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           businessName,
           city,
-          industry: t(`audit.industries.${industry}`),
+          industry: industryValue,
         }),
       })
 
@@ -255,23 +282,75 @@ export default function AuditPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="city" className="text-gray-700">{t('audit.city')}</Label>
-                    <Select value={city} onValueChange={setCity} required>
-                      <SelectTrigger className="border-gray-200">
-                        <SelectValue placeholder={t('audit.cityPlaceholder')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {SWISS_CITIES.map((c) => (
-                          <SelectItem key={c} value={c}>
-                            {c}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <Popover open={cityOpen} onOpenChange={setCityOpen}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          aria-expanded={cityOpen}
+                          className="w-full justify-between border-gray-200 font-normal"
+                        >
+                          {city || t('audit.cityPlaceholder')}
+                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-full p-0" align="start">
+                        <Command>
+                          <CommandInput
+                            placeholder={t('audit.citySearchPlaceholder') || 'Search city...'}
+                            value={citySearch}
+                            onValueChange={setCitySearch}
+                          />
+                          <CommandList>
+                            <CommandEmpty>
+                              {citySearch && (
+                                <button
+                                  className="w-full px-2 py-3 text-sm text-left hover:bg-gray-100 cursor-pointer"
+                                  onClick={() => {
+                                    setCity(citySearch)
+                                    setCityOpen(false)
+                                    setCitySearch('')
+                                  }}
+                                >
+                                  {t('audit.useCustomCity') || 'Use'}: &quot;{citySearch}&quot;
+                                </button>
+                              )}
+                            </CommandEmpty>
+                            <CommandGroup>
+                              {SWISS_CITIES.filter(c =>
+                                c.toLowerCase().includes(citySearch.toLowerCase())
+                              ).slice(0, 50).map((c) => (
+                                <CommandItem
+                                  key={c}
+                                  value={c}
+                                  onSelect={(value) => {
+                                    setCity(value)
+                                    setCityOpen(false)
+                                    setCitySearch('')
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      "mr-2 h-4 w-4",
+                                      city === c ? "opacity-100" : "opacity-0"
+                                    )}
+                                  />
+                                  {c}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="industry" className="text-gray-700">{t('audit.industry')}</Label>
-                    <Select value={industry} onValueChange={setIndustry} required>
+                    <Select value={industry} onValueChange={(value) => {
+                      setIndustry(value)
+                      if (value !== 'other') setCustomIndustry('')
+                    }} required>
                       <SelectTrigger className="border-gray-200">
                         <SelectValue placeholder={t('audit.industryPlaceholder')} />
                       </SelectTrigger>
@@ -283,6 +362,15 @@ export default function AuditPage() {
                         ))}
                       </SelectContent>
                     </Select>
+                    {industry === 'other' && (
+                      <Input
+                        placeholder={t('audit.customIndustryPlaceholder') || 'Enter your industry/niche...'}
+                        value={customIndustry}
+                        onChange={(e) => setCustomIndustry(e.target.value)}
+                        className="border-gray-200 focus:border-purple-300 focus:ring-purple-200 mt-2"
+                        required
+                      />
+                    )}
                   </div>
 
                   {error && (
