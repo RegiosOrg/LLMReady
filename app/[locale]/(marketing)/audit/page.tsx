@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
@@ -26,8 +26,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { Search, Loader2, AlertCircle, CheckCircle2, XCircle, ArrowRight, TrendingUp, Download, ChevronsUpDown, Check } from 'lucide-react'
+import { Search, Loader2, AlertCircle, CheckCircle2, XCircle, ArrowRight, TrendingUp, Download, ChevronsUpDown, Check, Users, Target, Award } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import {
+  getIndustryBenchmark,
+  getCompetitivePosition,
+  type IndustryBenchmark
+} from '@/lib/benchmarks/industryData'
 
 // Comprehensive list of Swiss cities (alphabetically sorted)
 const SWISS_CITIES = [
@@ -106,6 +111,24 @@ export default function AuditPage() {
   const [downloading, setDownloading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [results, setResults] = useState<AuditResponse | null>(null)
+  const [benchmark, setBenchmark] = useState<IndustryBenchmark | null>(null)
+  const [competitivePosition, setCompetitivePosition] = useState<ReturnType<typeof getCompetitivePosition> | null>(null)
+
+  // Fetch benchmark data when results are available
+  useEffect(() => {
+    if (results) {
+      const industryBenchmark = getIndustryBenchmark(results.industry)
+      setBenchmark(industryBenchmark)
+
+      if (industryBenchmark) {
+        const position = getCompetitivePosition(results.overallScore, results.industry)
+        setCompetitivePosition(position)
+      }
+    } else {
+      setBenchmark(null)
+      setCompetitivePosition(null)
+    }
+  }, [results])
 
   const languages = [
     { code: 'en', name: 'EN' },
@@ -433,6 +456,135 @@ export default function AuditPage() {
                 {t('audit.mentionedIn', { count: results.mentionedIn })}
               </p>
             </div>
+
+            {/* Competitive Position Section */}
+            {benchmark && competitivePosition && (
+              <div className="mb-8 bg-white rounded-2xl border border-gray-200 p-6 shadow-lg">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                    <Target className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">Wettbewerbsanalyse</h3>
+                    <p className="text-sm text-gray-500">Ihre Position in {benchmark.industryDE}</p>
+                  </div>
+                </div>
+
+                {/* Position Badge */}
+                <div className={`mb-6 p-4 rounded-xl border ${
+                  competitivePosition.urgency === 'critical' ? 'bg-red-50 border-red-200' :
+                  competitivePosition.urgency === 'warning' ? 'bg-amber-50 border-amber-200' :
+                  competitivePosition.urgency === 'moderate' ? 'bg-blue-50 border-blue-200' :
+                  'bg-green-50 border-green-200'
+                }`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`text-lg font-bold ${
+                      competitivePosition.urgency === 'critical' ? 'text-red-700' :
+                      competitivePosition.urgency === 'warning' ? 'text-amber-700' :
+                      competitivePosition.urgency === 'moderate' ? 'text-blue-700' :
+                      'text-green-700'
+                    }`}>
+                      {competitivePosition.position}
+                    </span>
+                    <span className="text-sm text-gray-600">
+                      Top {Math.round(100 - competitivePosition.percentile)}%
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-700">{competitivePosition.message}</p>
+                </div>
+
+                {/* Stats Grid */}
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="text-center p-4 bg-gray-50 rounded-xl">
+                    <div className="text-2xl font-bold text-gray-900">{results.overallScore}</div>
+                    <div className="text-xs text-gray-500">Ihr Score</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-xl">
+                    <div className="text-2xl font-bold text-gray-900">{benchmark.avgScore}</div>
+                    <div className="text-xs text-gray-500">Branchenschnitt</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-50 rounded-xl">
+                    <div className="text-2xl font-bold text-emerald-600">{benchmark.topPerformers[0]?.score || 0}</div>
+                    <div className="text-xs text-gray-500">Branchenführer</div>
+                  </div>
+                </div>
+
+                {/* Top Competitors */}
+                <div>
+                  <h4 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    Top Wettbewerber in Ihrer Branche
+                  </h4>
+                  <div className="space-y-2">
+                    {benchmark.topPerformers.slice(0, 4).map((competitor, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                          i === 0 ? 'bg-amber-100 text-amber-700' :
+                          i === 1 ? 'bg-gray-100 text-gray-600' :
+                          i === 2 ? 'bg-orange-100 text-orange-700' :
+                          'bg-gray-50 text-gray-500'
+                        }`}>
+                          {i + 1}
+                        </span>
+                        <div className="flex-1 flex items-center gap-2">
+                          <span className="text-sm text-gray-700 truncate">{competitor.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${
+                                competitor.score >= 80 ? 'bg-emerald-500' :
+                                competitor.score >= 60 ? 'bg-lime-500' :
+                                competitor.score >= 40 ? 'bg-amber-500' :
+                                'bg-red-500'
+                              }`}
+                              style={{ width: `${competitor.score}%` }}
+                            />
+                          </div>
+                          <span className="text-sm font-medium text-gray-900 w-8">{competitor.score}</span>
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Show user's position */}
+                    <div className="flex items-center gap-3 bg-purple-50 p-2 rounded-lg border border-purple-200 mt-3">
+                      <span className="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">
+                        Sie
+                      </span>
+                      <div className="flex-1 flex items-center gap-2">
+                        <span className="text-sm font-medium text-purple-900 truncate">{results.businessName}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 h-2 bg-purple-200 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-purple-600"
+                            style={{ width: `${results.overallScore}%` }}
+                          />
+                        </div>
+                        <span className="text-sm font-bold text-purple-900 w-8">{results.overallScore}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gap to Leader */}
+                {benchmark.topPerformers[0] && results.overallScore < benchmark.topPerformers[0].score && (
+                  <div className="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-200">
+                    <div className="flex items-center gap-3">
+                      <Users className="w-5 h-5 text-indigo-600" />
+                      <div>
+                        <p className="text-sm font-medium text-indigo-900">
+                          Gap zum Branchenführer: <span className="font-bold">{benchmark.topPerformers[0].score - results.overallScore} Punkte</span>
+                        </p>
+                        <p className="text-xs text-indigo-700 mt-1">
+                          {benchmark.insight}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Individual Results */}
             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('audit.checkResults')}</h2>
