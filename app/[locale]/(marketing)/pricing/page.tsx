@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Check, X, Zap, Building, Rocket } from 'lucide-react'
 
 const plans = [
@@ -67,8 +67,16 @@ const plans = [
 ]
 
 export default function PricingPage() {
+  const t = useTranslations()
+  const locale = useLocale()
   const [interval, setInterval] = useState<'monthly' | 'yearly'>('monthly')
   const [loading, setLoading] = useState<string | null>(null)
+
+  const languages = [
+    { code: 'en', name: 'EN' },
+    { code: 'de', name: 'DE' },
+    { code: 'fr', name: 'FR' },
+  ]
 
   const handleCheckout = async (planKey: string) => {
     if (planKey === 'FREE') {
@@ -90,7 +98,6 @@ export default function PricingPage() {
       if (data.url) {
         window.location.href = data.url
       } else {
-        // Not logged in, redirect to register
         window.location.href = '/register'
       }
     } catch (error) {
@@ -101,60 +108,89 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <header className="container mx-auto px-4 py-6">
-        <nav className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-            </div>
-            <span className="text-xl font-bold text-white">GetCitedBy</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-slate-300 hover:text-white">
-              Sign in
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#667eea] to-[#764ba2] rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">
+                GetCitedBy
+              </span>
             </Link>
-            <Button asChild>
-              <Link href="/register">Get Started</Link>
-            </Button>
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/audit" className="text-purple-600 hover:text-purple-700 transition font-medium">Free Audit</Link>
+
+              {/* Language Switcher */}
+              <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-lg">
+                {languages.map((lang) => (
+                  <Link
+                    key={lang.code}
+                    href="/pricing"
+                    locale={lang.code}
+                    className={`px-2 py-1 text-sm rounded transition ${
+                      locale === lang.code
+                        ? 'bg-white text-gray-900 font-medium shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {lang.name}
+                  </Link>
+                ))}
+              </div>
+
+              <Link href="/login" className="px-5 py-2.5 text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 transition font-medium">
+                {t('nav.login')}
+              </Link>
+              <Link href="/register" className="px-5 py-2.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl hover:opacity-90 transition font-medium shadow-lg shadow-purple-500/25">
+                {t('nav.getStarted')}
+              </Link>
+            </div>
           </div>
-        </nav>
-      </header>
+        </div>
+      </nav>
 
       {/* Pricing Section */}
-      <main className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Simple, transparent pricing
-          </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Start free, upgrade when you need more. All plans include our core AI visibility tools.
-          </p>
+      <main className="container mx-auto px-6 py-16">
+        <div className="text-center mb-12 relative">
+          <div className="absolute top-0 left-1/4 w-72 h-72 bg-purple-200 rounded-full blur-3xl opacity-20"></div>
+          <div className="absolute top-10 right-1/4 w-64 h-64 bg-indigo-200 rounded-full blur-3xl opacity-30"></div>
 
-          {/* Billing Toggle */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <span className={interval === 'monthly' ? 'text-white' : 'text-slate-400'}>
-              Monthly
-            </span>
-            <button
-              onClick={() => setInterval(interval === 'monthly' ? 'yearly' : 'monthly')}
-              className="relative w-14 h-7 bg-slate-700 rounded-full p-1 transition-colors"
-            >
-              <div
-                className={`w-5 h-5 bg-indigo-500 rounded-full transition-transform ${
-                  interval === 'yearly' ? 'translate-x-7' : 'translate-x-0'
-                }`}
-              />
-            </button>
-            <span className={interval === 'yearly' ? 'text-white' : 'text-slate-400'}>
-              Yearly
-              <span className="ml-2 text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded">
-                Save 17%
+          <div className="relative">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Simple, transparent pricing
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Start free, upgrade when you need more. All plans include our core AI visibility tools.
+            </p>
+
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <span className={`font-medium ${interval === 'monthly' ? 'text-gray-900' : 'text-gray-400'}`}>
+                Monthly
               </span>
-            </span>
+              <button
+                onClick={() => setInterval(interval === 'monthly' ? 'yearly' : 'monthly')}
+                className="relative w-14 h-7 bg-gray-200 rounded-full p-1 transition-colors"
+              >
+                <div
+                  className={`w-5 h-5 bg-gradient-to-r from-[#667eea] to-[#764ba2] rounded-full transition-transform shadow-lg ${
+                    interval === 'yearly' ? 'translate-x-7' : 'translate-x-0'
+                  }`}
+                />
+              </button>
+              <span className={`font-medium ${interval === 'yearly' ? 'text-gray-900' : 'text-gray-400'}`}>
+                Yearly
+                <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
+                  Save 17%
+                </span>
+              </span>
+            </div>
           </div>
         </div>
 
@@ -163,118 +199,127 @@ export default function PricingPage() {
           {plans.map((plan) => {
             const Icon = plan.icon
             return (
-              <Card
+              <div
                 key={plan.key}
-                className={`relative ${
+                className={`relative bg-white rounded-2xl border p-8 transition-all hover:shadow-xl ${
                   plan.popular
-                    ? 'border-indigo-500 shadow-lg shadow-indigo-500/20'
-                    : ''
+                    ? 'border-purple-200 shadow-xl shadow-purple-100/50 scale-105'
+                    : 'border-gray-200 shadow-lg shadow-gray-100/50 hover:-translate-y-1'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-indigo-500 text-white text-sm font-medium px-3 py-1 rounded-full">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white text-sm font-semibold px-4 py-1.5 rounded-full shadow-lg">
                       Most Popular
                     </span>
                   </div>
                 )}
-                <CardHeader className="text-center pb-2">
-                  <div className="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <Icon className="h-6 w-6 text-indigo-400" />
-                  </div>
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <CardDescription>{plan.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center mb-6">
-                    <span className="text-4xl font-bold text-white">
-                      ${plan.price[interval]}
-                    </span>
-                    {plan.price[interval] > 0 && (
-                      <span className="text-slate-400">
-                        /{interval === 'monthly' ? 'mo' : 'yr'}
-                      </span>
-                    )}
-                  </div>
 
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, i) => (
-                      <li
-                        key={i}
-                        className={`flex items-center gap-2 text-sm ${
-                          feature.included ? 'text-slate-300' : 'text-slate-500'
-                        }`}
-                      >
-                        {feature.included ? (
-                          <Check className="h-4 w-4 text-indigo-400 flex-shrink-0" />
-                        ) : (
-                          <X className="h-4 w-4 text-slate-600 flex-shrink-0" />
-                        )}
-                        {feature.text}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    onClick={() => handleCheckout(plan.key)}
-                    disabled={loading === plan.key}
-                    className="w-full"
-                    variant={plan.popular ? 'default' : 'outline'}
-                  >
-                    {loading === plan.key ? 'Loading...' : plan.cta}
-                  </Button>
-                </CardFooter>
-              </Card>
+                <div className="text-center mb-6">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 ${
+                    plan.popular
+                      ? 'bg-gradient-to-br from-[#667eea] to-[#764ba2] shadow-lg shadow-purple-500/30'
+                      : 'bg-gray-100'
+                  }`}>
+                    <Icon className={`h-7 w-7 ${plan.popular ? 'text-white' : 'text-gray-600'}`} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                  <p className="text-gray-500">{plan.description}</p>
+                </div>
+
+                <div className="text-center mb-6">
+                  <span className="text-5xl font-bold text-gray-900">
+                    ${plan.price[interval]}
+                  </span>
+                  {plan.price[interval] > 0 && (
+                    <span className="text-gray-500 ml-1">
+                      /{interval === 'monthly' ? 'mo' : 'yr'}
+                    </span>
+                  )}
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li
+                      key={i}
+                      className={`flex items-center gap-3 text-sm ${
+                        feature.included ? 'text-gray-700' : 'text-gray-400'
+                      }`}
+                    >
+                      {feature.included ? (
+                        <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                          <Check className="h-3 w-3 text-green-600" />
+                        </div>
+                      ) : (
+                        <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                          <X className="h-3 w-3 text-gray-400" />
+                        </div>
+                      )}
+                      {feature.text}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  onClick={() => handleCheckout(plan.key)}
+                  disabled={loading === plan.key}
+                  className={`w-full ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-[#667eea] to-[#764ba2] hover:opacity-90 shadow-lg shadow-purple-500/25'
+                      : 'bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300'
+                  }`}
+                  size="lg"
+                >
+                  {loading === plan.key ? 'Loading...' : plan.cta}
+                </Button>
+              </div>
             )
           })}
         </div>
 
         {/* Enterprise CTA */}
         <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border-indigo-500/20">
-            <CardContent className="py-8">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Need more? Contact us for Enterprise
-              </h3>
-              <p className="text-slate-400 mb-6">
-                Unlimited businesses, custom integrations, dedicated support, and SLA guarantees.
-              </p>
-              <Button variant="outline">
-                <a href="mailto:enterprise@getcitedby.com">Contact Sales</a>
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="max-w-2xl mx-auto bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 p-8 shadow-lg">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              Need more? Contact us for Enterprise
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Unlimited businesses, custom integrations, dedicated support, and SLA guarantees.
+            </p>
+            <Button variant="outline" className="border-gray-300" asChild>
+              <a href="mailto:enterprise@getcitedby.com">Contact Sales</a>
+            </Button>
+          </div>
         </div>
 
         {/* FAQ */}
         <div className="mt-20 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-white text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">
-                What's included in the free plan?
+          <div className="space-y-8">
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                What&apos;s included in the free plan?
               </h3>
-              <p className="text-slate-400">
+              <p className="text-gray-600">
                 The Starter plan includes 1 business profile, basic entity extraction, 5 citation sources, 3 LLM visibility checks per month, and basic schema generation. Perfect for testing if GetCitedBy works for you.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Can I cancel anytime?
               </h3>
-              <p className="text-slate-400">
-                Yes! All paid plans are billed monthly or yearly with no long-term commitment. You can cancel anytime from your account settings, and you'll retain access until the end of your billing period.
+              <p className="text-gray-600">
+                Yes! All paid plans are billed monthly or yearly with no long-term commitment. You can cancel anytime from your account settings, and you&apos;ll retain access until the end of your billing period.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-medium text-white mb-2">
+            <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 What LLM platforms do you check?
               </h3>
-              <p className="text-slate-400">
-                We currently check visibility on ChatGPT (OpenAI) and Claude (Anthropic). We're continuously adding support for more AI platforms including Perplexity, Google Gemini, and others.
+              <p className="text-gray-600">
+                We currently check visibility on ChatGPT (OpenAI) and Claude (Anthropic). We&apos;re continuously adding support for more AI platforms including Perplexity, Google Gemini, and others.
               </p>
             </div>
           </div>
@@ -282,17 +327,23 @@ export default function PricingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 mt-20">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-sm">
-              &copy; {new Date().getFullYear()} GetCitedBy. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm text-slate-400">
-              <Link href="/terms" className="hover:text-white">Terms</Link>
-              <Link href="/privacy" className="hover:text-white">Privacy</Link>
-              <a href="mailto:support@getcitedby.com" className="hover:text-white">Support</a>
+      <footer className="bg-gray-50 border-t border-gray-200 py-12 mt-20">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#667eea] to-[#764ba2] rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                </svg>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">GetCitedBy</span>
             </div>
+            <div className="flex items-center gap-8 text-gray-600">
+              <Link href="/privacy" className="hover:text-gray-900 transition">{t('footer.privacy')}</Link>
+              <Link href="/terms" className="hover:text-gray-900 transition">{t('footer.terms')}</Link>
+              <a href="mailto:support@getcitedby.com" className="hover:text-gray-900 transition">Support</a>
+            </div>
+            <p className="text-gray-500">&copy; 2025 GetCitedBy. {t('footer.madeIn')}</p>
           </div>
         </div>
       </footer>
