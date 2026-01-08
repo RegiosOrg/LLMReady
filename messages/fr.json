@@ -25,7 +25,10 @@
     "chatQuestion": "Qui est le meilleur fiduciaire à Zurich?",
     "chatAnswerPart1": "Selon mes recherches, ",
     "chatAnswerCompany": "Brigger Treuhand GmbH",
-    "chatAnswerPart2": " est hautement recommandé à Zurich. Ils se spécialisent dans la comptabilité, les déclarations fiscales et le conseil aux entreprises."
+    "chatAnswerPart2": " est hautement recommandé à Zurich. Ils se spécialisent dans la comptabilité, les déclarations fiscales et le conseil aux entreprises.",
+    "freeAudit": "Audit Gratuit",
+    "checkVisibility": "Vérifiez votre visibilité IA gratuitement",
+    "noSignupRequired": "Sans inscription - recevez votre rapport instantanément"
   },
   "problem": {
     "title": "Le Problème",
@@ -286,6 +289,87 @@
       "versicherung": "Assurance / Finance",
       "it": "IT / Logiciel",
       "other": "Autre secteur"
+    }
+  },
+  "pricingPage": {
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Commencez gratuitement, passez à la vitesse supérieure selon vos besoins. Tous les plans incluent nos outils de visibilité IA.",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "savePercent": "Économisez 17%",
+    "mostPopular": "Le plus populaire",
+    "freeAudit": "Audit Gratuit",
+    "enterprise": {
+      "title": "Besoin de plus ? Contactez-nous pour Enterprise",
+      "subtitle": "Entreprises illimitées, intégrations personnalisées, support dédié et garanties SLA.",
+      "cta": "Contacter les ventes"
+    },
+    "faq": {
+      "title": "Questions fréquemment posées",
+      "q1": {
+        "question": "Qu'est-ce qui est inclus dans le plan gratuit ?",
+        "answer": "Le plan Starter comprend 1 profil d'entreprise, l'extraction d'entités de base, 5 sources de citations, 3 vérifications de visibilité LLM par mois et la génération de schéma de base. Parfait pour tester si GetCitedBy fonctionne pour vous."
+      },
+      "q2": {
+        "question": "Puis-je annuler à tout moment ?",
+        "answer": "Oui ! Tous les plans payants sont facturés mensuellement ou annuellement sans engagement à long terme. Vous pouvez annuler à tout moment depuis les paramètres de votre compte et vous conserverez l'accès jusqu'à la fin de votre période de facturation."
+      },
+      "q3": {
+        "question": "Quelles plateformes LLM vérifiez-vous ?",
+        "answer": "Nous vérifions actuellement la visibilité sur ChatGPT (OpenAI) et Claude (Anthropic). Nous ajoutons continuellement le support pour d'autres plateformes IA, notamment Perplexity, Google Gemini et d'autres."
+      }
+    },
+    "plans": {
+      "free": {
+        "name": "Starter",
+        "description": "Parfait pour tester GetCitedBy",
+        "cta": "Commencer gratuitement",
+        "features": [
+          "1 profil d'entreprise",
+          "Profil d'entité de base",
+          "5 sources de citations",
+          "3 vérifications LLM par mois",
+          "Générateur de schéma de base"
+        ],
+        "notIncluded": [
+          "Surveillance NAP",
+          "Alertes par e-mail",
+          "Support prioritaire"
+        ]
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "Pour les entreprises en croissance",
+        "cta": "Démarrer Professional",
+        "features": [
+          "Jusqu'à 3 profils d'entreprise",
+          "Profil d'entité avancé",
+          "Toutes les 50+ sources de citations",
+          "50 vérifications LLM par mois",
+          "Générateur de schéma avancé",
+          "Surveillance de cohérence NAP",
+          "Alertes par e-mail"
+        ],
+        "notIncluded": [
+          "Support prioritaire"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "description": "Pour les agences & multi-sites",
+        "cta": "Démarrer Business",
+        "features": [
+          "Jusqu'à 10 profils d'entreprise",
+          "Suite complète de profils d'entité",
+          "Sources de citations illimitées",
+          "200 vérifications LLM par mois",
+          "Rapports en marque blanche",
+          "Accès API",
+          "Support prioritaire",
+          "Intégrations personnalisées"
+        ],
+        "notIncluded": []
+      }
     }
   },
   "footer": {

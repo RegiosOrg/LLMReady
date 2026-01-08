@@ -46,7 +46,7 @@ export default async function LandingPage({ params: { locale } }: PageProps) {
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link href={localePath('/audit')} className="text-purple-600 hover:text-purple-700 transition font-medium">Free Audit</Link>
+              <Link href={localePath('/audit')} className="text-purple-600 hover:text-purple-700 transition font-medium">{t('hero.freeAudit')}</Link>
               <a href="#features" className="text-gray-600 hover:text-gray-900 transition font-medium">{t('nav.features')}</a>
               <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition font-medium">{t('nav.pricing')}</a>
               <a href="#faq" className="text-gray-600 hover:text-gray-900 transition font-medium">{t('nav.faq')}</a>
@@ -109,13 +109,13 @@ export default async function LandingPage({ params: { locale } }: PageProps) {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                Check Your AI Visibility Free
+                {t('hero.checkVisibility')}
               </Link>
               <Link href={localePath('/register')} className="px-8 py-4 bg-white border-2 border-gray-200 text-gray-700 text-lg font-semibold rounded-xl hover:border-gray-300 hover:bg-gray-50 transition flex items-center justify-center gap-2">
                 {t('hero.cta')}
               </Link>
             </div>
-            <p className="text-sm text-gray-500 mb-12">No signup required - get your report instantly</p>
+            <p className="text-sm text-gray-500 mb-12">{t('hero.noSignupRequired')}</p>
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-gray-500 text-sm">
               <span>{t('hero.trustedBy')}</span>

@@ -25,7 +25,10 @@
     "chatQuestion": "Who is the best Treuhand in Zurich?",
     "chatAnswerPart1": "Based on my research, ",
     "chatAnswerCompany": "Brigger Treuhand GmbH",
-    "chatAnswerPart2": " is highly recommended in Zurich. They specialize in Buchhaltung, Steuererklarung, and Unternehmensberatung."
+    "chatAnswerPart2": " is highly recommended in Zurich. They specialize in Buchhaltung, Steuererklarung, and Unternehmensberatung.",
+    "freeAudit": "Free Audit",
+    "checkVisibility": "Check Your AI Visibility Free",
+    "noSignupRequired": "No signup required - get your report instantly"
   },
   "problem": {
     "title": "The Problem",
@@ -286,6 +289,87 @@
       "versicherung": "Insurance / Finance",
       "it": "IT / Software",
       "other": "Other Industry"
+    }
+  },
+  "pricingPage": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Start free, upgrade when you need more. All plans include our core AI visibility tools.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "savePercent": "Save 17%",
+    "mostPopular": "Most Popular",
+    "freeAudit": "Free Audit",
+    "enterprise": {
+      "title": "Need more? Contact us for Enterprise",
+      "subtitle": "Unlimited businesses, custom integrations, dedicated support, and SLA guarantees.",
+      "cta": "Contact Sales"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "What's included in the free plan?",
+        "answer": "The Starter plan includes 1 business profile, basic entity extraction, 5 citation sources, 3 LLM visibility checks per month, and basic schema generation. Perfect for testing if GetCitedBy works for you."
+      },
+      "q2": {
+        "question": "Can I cancel anytime?",
+        "answer": "Yes! All paid plans are billed monthly or yearly with no long-term commitment. You can cancel anytime from your account settings, and you'll retain access until the end of your billing period."
+      },
+      "q3": {
+        "question": "What LLM platforms do you check?",
+        "answer": "We currently check visibility on ChatGPT (OpenAI) and Claude (Anthropic). We're continuously adding support for more AI platforms including Perplexity, Google Gemini, and others."
+      }
+    },
+    "plans": {
+      "free": {
+        "name": "Starter",
+        "description": "Perfect for trying out GetCitedBy",
+        "cta": "Get Started Free",
+        "features": [
+          "1 business profile",
+          "Basic entity profile",
+          "5 citation sources",
+          "3 LLM checks per month",
+          "Basic schema generator"
+        ],
+        "notIncluded": [
+          "NAP monitoring",
+          "Email alerts",
+          "Priority support"
+        ]
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "For growing businesses",
+        "cta": "Start Professional",
+        "features": [
+          "Up to 3 business profiles",
+          "Advanced entity profile",
+          "All 50+ citation sources",
+          "50 LLM checks per month",
+          "Advanced schema generator",
+          "NAP consistency monitoring",
+          "Email alerts"
+        ],
+        "notIncluded": [
+          "Priority support"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "description": "For agencies & multi-location",
+        "cta": "Start Business",
+        "features": [
+          "Up to 10 business profiles",
+          "Full entity profile suite",
+          "Unlimited citation sources",
+          "200 LLM checks per month",
+          "White-label reports",
+          "API access",
+          "Priority support",
+          "Custom integrations"
+        ],
+        "notIncluded": []
+      }
     }
   },
   "footer": {

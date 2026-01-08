@@ -25,7 +25,10 @@
     "chatQuestion": "Wer ist der beste Treuhänder in Zürich?",
     "chatAnswerPart1": "Basierend auf meiner Recherche ist ",
     "chatAnswerCompany": "Brigger Treuhand GmbH",
-    "chatAnswerPart2": " in Zürich sehr empfohlen. Sie spezialisieren sich auf Buchhaltung, Steuererklärung und Unternehmensberatung."
+    "chatAnswerPart2": " in Zürich sehr empfohlen. Sie spezialisieren sich auf Buchhaltung, Steuererklärung und Unternehmensberatung.",
+    "freeAudit": "Gratis Audit",
+    "checkVisibility": "Prüfen Sie Ihre KI-Sichtbarkeit kostenlos",
+    "noSignupRequired": "Keine Anmeldung erforderlich - Bericht sofort erhalten"
   },
   "problem": {
     "title": "Das Problem",
@@ -286,6 +289,87 @@
       "versicherung": "Versicherung / Finanzen",
       "it": "IT / Software",
       "other": "Andere Branche"
+    }
+  },
+  "pricingPage": {
+    "title": "Einfache, transparente Preise",
+    "subtitle": "Starten Sie kostenlos, upgraden Sie bei Bedarf. Alle Pläne beinhalten unsere KI-Sichtbarkeitstools.",
+    "monthly": "Monatlich",
+    "yearly": "Jährlich",
+    "savePercent": "17% sparen",
+    "mostPopular": "Am beliebtesten",
+    "freeAudit": "Gratis Audit",
+    "enterprise": {
+      "title": "Mehr benötigt? Kontaktieren Sie uns für Enterprise",
+      "subtitle": "Unbegrenzte Unternehmen, individuelle Integrationen, dedizierter Support und SLA-Garantien.",
+      "cta": "Vertrieb kontaktieren"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Was ist im kostenlosen Plan enthalten?",
+        "answer": "Der Starter-Plan beinhaltet 1 Unternehmensprofil, grundlegende Entitäts-Extraktion, 5 Zitationsquellen, 3 LLM-Sichtbarkeitsprüfungen pro Monat und grundlegende Schema-Generierung. Perfekt zum Testen, ob GetCitedBy für Sie funktioniert."
+      },
+      "q2": {
+        "question": "Kann ich jederzeit kündigen?",
+        "answer": "Ja! Alle kostenpflichtigen Pläne werden monatlich oder jährlich ohne langfristige Verpflichtung abgerechnet. Sie können jederzeit über Ihre Kontoeinstellungen kündigen und behalten den Zugang bis zum Ende Ihres Abrechnungszeitraums."
+      },
+      "q3": {
+        "question": "Welche LLM-Plattformen prüfen Sie?",
+        "answer": "Wir prüfen derzeit die Sichtbarkeit auf ChatGPT (OpenAI) und Claude (Anthropic). Wir fügen kontinuierlich Unterstützung für weitere KI-Plattformen hinzu, darunter Perplexity, Google Gemini und andere."
+      }
+    },
+    "plans": {
+      "free": {
+        "name": "Starter",
+        "description": "Perfekt zum Testen von GetCitedBy",
+        "cta": "Kostenlos starten",
+        "features": [
+          "1 Unternehmensprofil",
+          "Basis-Entitätsprofil",
+          "5 Zitationsquellen",
+          "3 LLM-Prüfungen pro Monat",
+          "Basis-Schema-Generator"
+        ],
+        "notIncluded": [
+          "NAP-Überwachung",
+          "E-Mail-Benachrichtigungen",
+          "Prioritäts-Support"
+        ]
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "Für wachsende Unternehmen",
+        "cta": "Professional starten",
+        "features": [
+          "Bis zu 3 Unternehmensprofile",
+          "Erweitertes Entitätsprofil",
+          "Alle 50+ Zitationsquellen",
+          "50 LLM-Prüfungen pro Monat",
+          "Erweiterter Schema-Generator",
+          "NAP-Konsistenzüberwachung",
+          "E-Mail-Benachrichtigungen"
+        ],
+        "notIncluded": [
+          "Prioritäts-Support"
+        ]
+      },
+      "business": {
+        "name": "Business",
+        "description": "Für Agenturen & Multi-Standorte",
+        "cta": "Business starten",
+        "features": [
+          "Bis zu 10 Unternehmensprofile",
+          "Vollständige Entitätsprofil-Suite",
+          "Unbegrenzte Zitationsquellen",
+          "200 LLM-Prüfungen pro Monat",
+          "White-Label-Berichte",
+          "API-Zugang",
+          "Prioritäts-Support",
+          "Individuelle Integrationen"
+        ],
+        "notIncluded": []
+      }
     }
   },
   "footer": {
