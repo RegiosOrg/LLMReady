@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { useTranslations, useLocale } from 'next-intl'
+import { Link } from '@/i18n/routing'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -38,20 +39,20 @@ const SWISS_CITIES = [
   'Zug',
 ]
 
-const INDUSTRIES = [
-  { value: 'treuhand', label: 'Treuhand / Buchhalter' },
-  { value: 'anwalt', label: 'Rechtsanwalt / Notar' },
-  { value: 'zahnarzt', label: 'Zahnarzt / Zahnklinik' },
-  { value: 'arzt', label: 'Arzt / Klinik' },
-  { value: 'immobilien', label: 'Immobilien / Makler' },
-  { value: 'handwerk', label: 'Handwerker / Bauunternehmen' },
-  { value: 'restaurant', label: 'Restaurant / Gastronomie' },
-  { value: 'hotel', label: 'Hotel / Unterkunft' },
-  { value: 'auto', label: 'Autohandel / Werkstatt' },
-  { value: 'versicherung', label: 'Versicherung / Finanzen' },
-  { value: 'it', label: 'IT / Software' },
-  { value: 'other', label: 'Andere Branche' },
-]
+const INDUSTRY_KEYS = [
+  'treuhand',
+  'anwalt',
+  'zahnarzt',
+  'arzt',
+  'immobilien',
+  'handwerk',
+  'restaurant',
+  'hotel',
+  'auto',
+  'versicherung',
+  'it',
+  'other',
+] as const
 
 interface AuditResult {
   provider: string
@@ -73,6 +74,9 @@ interface AuditResponse {
 }
 
 export default function AuditPage() {
+  const t = useTranslations()
+  const locale = useLocale()
+
   const [businessName, setBusinessName] = useState('')
   const [city, setCity] = useState('')
   const [industry, setIndustry] = useState('')
@@ -80,6 +84,12 @@ export default function AuditPage() {
   const [downloading, setDownloading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [results, setResults] = useState<AuditResponse | null>(null)
+
+  const languages = [
+    { code: 'en', name: 'EN' },
+    { code: 'de', name: 'DE' },
+    { code: 'fr', name: 'FR' },
+  ]
 
   const downloadPDF = async () => {
     if (!results) return
@@ -123,7 +133,7 @@ export default function AuditPage() {
         body: JSON.stringify({
           businessName,
           city,
-          industry: INDUSTRIES.find(i => i.value === industry)?.label || industry,
+          industry: t(`audit.industries.${industry}`),
         }),
       })
 
@@ -170,12 +180,31 @@ export default function AuditPage() {
               </span>
             </Link>
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/pricing" className="text-gray-600 hover:text-gray-900 transition font-medium">Pricing</Link>
+              <Link href="/pricing" className="text-gray-600 hover:text-gray-900 transition font-medium">{t('nav.pricing')}</Link>
+
+              {/* Language Switcher */}
+              <div className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded-lg">
+                {languages.map((lang) => (
+                  <Link
+                    key={lang.code}
+                    href="/audit"
+                    locale={lang.code}
+                    className={`px-2 py-1 text-sm rounded transition ${
+                      locale === lang.code
+                        ? 'bg-white text-gray-900 font-medium shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {lang.name}
+                  </Link>
+                ))}
+              </div>
+
               <Link href="/login" className="px-5 py-2.5 text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 transition font-medium">
-                Sign in
+                {t('nav.login')}
               </Link>
               <Link href="/register" className="px-5 py-2.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl hover:opacity-90 transition font-medium shadow-lg shadow-purple-500/25">
-                Get Started
+                {t('nav.getStarted')}
               </Link>
             </div>
           </div>
@@ -193,15 +222,14 @@ export default function AuditPage() {
               <div className="relative">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-full text-purple-700 text-sm mb-8 shadow-sm">
                   <Search className="w-4 h-4" />
-                  <span className="font-medium">Free AI Visibility Check</span>
+                  <span className="font-medium">{t('audit.badge')}</span>
                 </div>
                 <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                  Is Your Business Visible to
-                  <span className="bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent"> AI?</span>
+                  {t('audit.title')}
+                  <span className="bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent"> {t('audit.titleHighlight')}</span>
                 </h1>
                 <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                  Check if ChatGPT, Claude, and other AI assistants know about your business.
-                  Takes 30 seconds, no signup required.
+                  {t('audit.subtitle')}
                 </p>
               </div>
             </div>
@@ -209,15 +237,15 @@ export default function AuditPage() {
             {/* Form */}
             <div className="max-w-xl mx-auto">
               <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-xl shadow-gray-100/50">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Enter Your Business Details</h2>
-                <p className="text-gray-500 mb-6">We&apos;ll check how AI assistants respond to queries about your business.</p>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">{t('audit.formTitle')}</h2>
+                <p className="text-gray-500 mb-6">{t('audit.formSubtitle')}</p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="businessName" className="text-gray-700">Business Name</Label>
+                    <Label htmlFor="businessName" className="text-gray-700">{t('audit.businessName')}</Label>
                     <Input
                       id="businessName"
-                      placeholder="e.g., Müller Treuhand AG"
+                      placeholder={t('audit.businessNamePlaceholder')}
                       value={businessName}
                       onChange={(e) => setBusinessName(e.target.value)}
                       required
@@ -226,10 +254,10 @@ export default function AuditPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="city" className="text-gray-700">City</Label>
+                    <Label htmlFor="city" className="text-gray-700">{t('audit.city')}</Label>
                     <Select value={city} onValueChange={setCity} required>
                       <SelectTrigger className="border-gray-200">
-                        <SelectValue placeholder="Select a city" />
+                        <SelectValue placeholder={t('audit.cityPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
                         {SWISS_CITIES.map((c) => (
@@ -242,15 +270,15 @@ export default function AuditPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="industry" className="text-gray-700">Industry</Label>
+                    <Label htmlFor="industry" className="text-gray-700">{t('audit.industry')}</Label>
                     <Select value={industry} onValueChange={setIndustry} required>
                       <SelectTrigger className="border-gray-200">
-                        <SelectValue placeholder="Select your industry" />
+                        <SelectValue placeholder={t('audit.industryPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
-                        {INDUSTRIES.map((ind) => (
-                          <SelectItem key={ind.value} value={ind.value}>
-                            {ind.label}
+                        {INDUSTRY_KEYS.map((key) => (
+                          <SelectItem key={key} value={key}>
+                            {t(`audit.industries.${key}`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -268,12 +296,12 @@ export default function AuditPage() {
                     {loading ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Checking AI Visibility...
+                        {t('audit.checking')}
                       </>
                     ) : (
                       <>
                         <Search className="w-4 h-4 mr-2" />
-                        Check My Visibility
+                        {t('audit.submitButton')}
                       </>
                     )}
                   </Button>
@@ -283,19 +311,19 @@ export default function AuditPage() {
 
             {/* Trust indicators */}
             <div className="mt-12 text-center">
-              <p className="text-gray-500 text-sm mb-4">Trusted by Swiss businesses</p>
+              <p className="text-gray-500 text-sm mb-4">{t('audit.trustedBy')}</p>
               <div className="flex flex-wrap justify-center gap-8 text-gray-600">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">No signup required</span>
+                  <span className="text-sm">{t('audit.noSignup')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Free forever</span>
+                  <span className="text-sm">{t('audit.freeForever')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span className="text-sm">Instant results</span>
+                  <span className="text-sm">{t('audit.instantResults')}</span>
                 </div>
               </div>
             </div>
@@ -305,21 +333,21 @@ export default function AuditPage() {
           <div className="max-w-3xl mx-auto">
             {/* Score Hero */}
             <div className={`mb-8 bg-gradient-to-br ${getScoreBgColor(results.overallScore)} rounded-2xl border p-12 text-center shadow-lg`}>
-              <p className="text-gray-500 mb-2 font-medium">AI Visibility Score</p>
+              <p className="text-gray-500 mb-2 font-medium">{t('audit.scoreLabel')}</p>
               <div className={`text-7xl font-bold ${getScoreColor(results.overallScore)} mb-2`}>
                 {results.overallScore}
               </div>
-              <p className="text-gray-500">out of 100</p>
+              <p className="text-gray-500">{t('audit.outOf')}</p>
               <p className="text-xl text-gray-900 mt-4 font-semibold">
                 {results.businessName} - {results.city}
               </p>
               <p className="text-gray-500 mt-2">
-                Mentioned in {results.mentionedIn} AI checks
+                {t('audit.mentionedIn', { count: results.mentionedIn })}
               </p>
             </div>
 
             {/* Individual Results */}
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Check Results</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('audit.checkResults')}</h2>
             <div className="space-y-4 mb-8">
               {results.results.map((result, index) => (
                 <div key={index} className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -331,20 +359,20 @@ export default function AuditPage() {
                       {result.mentioned ? (
                         <span className="flex items-center gap-1 text-xs text-green-700 bg-green-50 px-2.5 py-1 rounded-full border border-green-200 font-medium">
                           <CheckCircle2 className="w-3 h-3" />
-                          Mentioned
+                          {t('audit.mentioned')}
                         </span>
                       ) : (
                         <span className="flex items-center gap-1 text-xs text-red-700 bg-red-50 px-2.5 py-1 rounded-full border border-red-200 font-medium">
                           <XCircle className="w-3 h-3" />
-                          Not Found
+                          {t('audit.notFound')}
                         </span>
                       )}
                     </div>
                     <span className={`text-sm font-semibold ${getScoreColor(result.score)}`}>
-                      Score: {result.score}
+                      {t('audit.score')}: {result.score}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 mb-2">Prompt: &quot;{result.prompt}&quot;</p>
+                  <p className="text-xs text-gray-500 mb-2">{t('audit.prompt')}: &quot;{result.prompt}&quot;</p>
                   <p className="text-sm text-gray-600 line-clamp-4 bg-gray-50 p-3 rounded-lg">{result.response}</p>
                 </div>
               ))}
@@ -356,7 +384,7 @@ export default function AuditPage() {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#667eea] to-[#764ba2] flex items-center justify-center shadow-lg shadow-purple-500/20">
                   <TrendingUp className="w-4 h-4 text-white" />
                 </div>
-                Recommendations
+                {t('audit.recommendations')}
               </h3>
               <ul className="space-y-3">
                 {results.recommendations.map((rec, index) => (
@@ -373,15 +401,15 @@ export default function AuditPage() {
             {/* CTA */}
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl border border-purple-100 p-8 text-center shadow-lg">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Want to Improve Your Score?
+                {t('audit.improveTitle')}
               </h3>
               <p className="text-gray-600 mb-6">
-                GetCitedBy monitors your AI visibility and helps you get recommended by ChatGPT, Claude, and more.
+                {t('audit.improveSubtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="bg-gradient-to-r from-[#667eea] to-[#764ba2] hover:opacity-90 shadow-lg shadow-purple-500/25">
                   <Link href="/register">
-                    Start Free Trial
+                    {t('audit.startTrial')}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
@@ -389,17 +417,17 @@ export default function AuditPage() {
                   {downloading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Generating...
+                      {t('audit.generating')}
                     </>
                   ) : (
                     <>
                       <Download className="w-4 h-4 mr-2" />
-                      Download PDF
+                      {t('audit.downloadPdf')}
                     </>
                   )}
                 </Button>
                 <Button variant="ghost" size="lg" onClick={() => setResults(null)} className="text-gray-600 hover:text-gray-900">
-                  Run Another Check
+                  {t('audit.runAnother')}
                 </Button>
               </div>
             </div>
@@ -407,7 +435,7 @@ export default function AuditPage() {
             {/* Timestamp */}
             <div className="mt-8 text-center">
               <p className="text-gray-400 text-sm">
-                Report generated on {new Date(results.timestamp).toLocaleString()}
+                {t('audit.reportGenerated')} {new Date(results.timestamp).toLocaleString()}
               </p>
             </div>
           </div>
@@ -427,11 +455,11 @@ export default function AuditPage() {
               <span className="text-xl font-bold bg-gradient-to-r from-[#667eea] to-[#764ba2] bg-clip-text text-transparent">GetCitedBy</span>
             </div>
             <div className="flex items-center gap-8 text-gray-600">
-              <Link href="/privacy" className="hover:text-gray-900 transition">Privacy</Link>
-              <Link href="/terms" className="hover:text-gray-900 transition">Terms</Link>
-              <Link href="/pricing" className="hover:text-gray-900 transition">Pricing</Link>
+              <Link href="/privacy" className="hover:text-gray-900 transition">{t('footer.privacy')}</Link>
+              <Link href="/terms" className="hover:text-gray-900 transition">{t('footer.terms')}</Link>
+              <Link href="/pricing" className="hover:text-gray-900 transition">{t('nav.pricing')}</Link>
             </div>
-            <p className="text-gray-500">&copy; 2025 GetCitedBy. Made in Switzerland.</p>
+            <p className="text-gray-500">&copy; 2025 GetCitedBy. {t('footer.madeIn')}</p>
           </div>
         </div>
       </footer>
