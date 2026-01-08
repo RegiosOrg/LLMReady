@@ -39,6 +39,7 @@ coverage/
 # Prisma
 prisma/*.db
 prisma/*.db-journal
+prisma/prisma/
 
 # Misc
 *.tsbuildinfo
