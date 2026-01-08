@@ -1,10 +1,19 @@
 /**
  * Public Audit API - No authentication required
  * Rate limited to prevent abuse
+ *
+ * v2: Improved scoring algorithm with strict name matching
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
+import {
+  calculateVisibilityScore,
+  interpretScore,
+  analyzeNameMention,
+  hasRealBusinessInfo,
+  type ScoreBreakdown
+} from '@/lib/scoring/visibilityScoring'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -44,6 +53,7 @@ interface AuditResult {
   response: string
   mentioned: boolean
   score: number
+  scoreBreakdown: ScoreBreakdown
 }
 
 export async function POST(req: NextRequest) {
@@ -71,11 +81,11 @@ export async function POST(req: NextRequest) {
     // Run 2 visibility checks with OpenAI
     const prompts = [
       {
-        type: 'local',
+        type: 'local_search' as const,
         prompt: `I need a ${industry} in ${city}, Switzerland. Can you recommend some options?`,
       },
       {
-        type: 'direct',
+        type: 'direct_query' as const,
         prompt: `What can you tell me about ${businessName} in ${city}, Switzerland?`,
       },
     ]
@@ -89,7 +99,7 @@ export async function POST(req: NextRequest) {
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful assistant that provides information about local businesses in Switzerland. Be specific and factual. If you don\'t have information about a specific business, say so.',
+              content: 'You are a helpful assistant that provides information about local businesses in Switzerland. Be specific and factual. If you don\'t have information about a specific business, clearly say so rather than making up information.',
             },
             {
               role: 'user',
@@ -101,15 +111,18 @@ export async function POST(req: NextRequest) {
         })
 
         const response = completion.choices[0]?.message?.content || ''
-        const mentioned = checkMention(response, businessName)
-        const score = calculateScore(response, businessName, city)
+
+        // Use new scoring system
+        const scoreBreakdown = calculateVisibilityScore(response, businessName, type)
+        const nameAnalysis = analyzeNameMention(response, businessName)
 
         results.push({
           provider: 'ChatGPT',
           prompt,
           response,
-          mentioned,
-          score,
+          mentioned: nameAnalysis.mentioned,
+          score: scoreBreakdown.total,
+          scoreBreakdown,
         })
       } catch (error) {
         console.error(`Error running ${type} check:`, error)
@@ -119,26 +132,49 @@ export async function POST(req: NextRequest) {
           response: 'Error running check',
           mentioned: false,
           score: 0,
+          scoreBreakdown: {
+            mentionScore: 0,
+            positionScore: 0,
+            infoQualityScore: 0,
+            sentimentScore: 0,
+            total: 0,
+            explanation: 'Error running check'
+          },
         })
       }
     }
 
-    // Calculate overall score
+    // Calculate overall score (weighted average)
+    // Local search is more important (60%) than direct query (40%)
+    const localResult = results.find(r => r.prompt.includes('recommend'))
+    const directResult = results.find(r => r.prompt.includes('tell me about'))
+
     const overallScore = Math.round(
-      results.reduce((sum, r) => sum + r.score, 0) / results.length
+      (localResult?.score || 0) * 0.6 +
+      (directResult?.score || 0) * 0.4
     )
 
-    // Generate recommendations
+    // Get score interpretation
+    const interpretation = interpretScore(overallScore)
+
+    // Generate smart recommendations based on actual issues
+    const recommendations = generateSmartRecommendations(results, businessName, industry, overallScore)
+
+    // Count mentions
     const mentionedCount = results.filter(r => r.mentioned).length
-    const recommendations = generateRecommendations(mentionedCount, results.length, industry)
 
     return NextResponse.json({
       businessName,
       city,
       industry,
       overallScore,
+      interpretation,
       mentionedIn: `${mentionedCount}/${results.length}`,
-      results,
+      results: results.map(r => ({
+        ...r,
+        // Include explanation in UI
+        explanation: r.scoreBreakdown.explanation
+      })),
       recommendations,
       timestamp: new Date().toISOString(),
     })
@@ -151,68 +187,80 @@ export async function POST(req: NextRequest) {
   }
 }
 
-function checkMention(response: string, businessName: string): boolean {
-  const responseLower = response.toLowerCase()
-  const nameLower = businessName.toLowerCase()
-
-  // Direct match
-  if (responseLower.includes(nameLower)) return true
-
-  // Partial match for multi-word names
-  const words = nameLower.split(' ').filter(w => w.length > 3)
-  return words.some(word => responseLower.includes(word))
-}
-
-function calculateScore(response: string, businessName: string, city: string): number {
-  const responseLower = response.toLowerCase()
-  const nameLower = businessName.toLowerCase()
-  const cityLower = city.toLowerCase()
-
-  let score = 0
-
-  // Mentioned at all
-  if (checkMention(response, businessName)) {
-    score += 40
-
-    // City also mentioned in context
-    if (responseLower.includes(cityLower)) {
-      score += 20
-    }
-
-    // Positive sentiment
-    const positiveWords = ['recommend', 'trusted', 'reliable', 'professional', 'excellent', 'quality']
-    if (positiveWords.some(w => responseLower.includes(w))) {
-      score += 20
-    }
-
-    // Listed as an option
-    if (responseLower.includes('option') || responseLower.includes('consider')) {
-      score += 20
-    }
-  }
-
-  return score
-}
-
-function generateRecommendations(mentionedCount: number, totalChecks: number, industry: string): string[] {
+/**
+ * Generate recommendations based on actual scoring issues
+ */
+function generateSmartRecommendations(
+  results: AuditResult[],
+  businessName: string,
+  industry: string,
+  overallScore: number
+): string[] {
   const recommendations: string[] = []
 
-  if (mentionedCount === 0) {
-    recommendations.push('Your business is not visible to AI assistants. This is a critical issue.')
-    recommendations.push('Claim and optimize your Google Business Profile immediately.')
-    recommendations.push(`Register on Swiss business directories (local.ch, search.ch) as a ${industry}.`)
-    recommendations.push('Add structured data (Schema.org) to your website.')
-    recommendations.push('Build citations on industry-specific directories.')
-  } else if (mentionedCount < totalChecks) {
-    recommendations.push('Your business has partial AI visibility. There\'s room for improvement.')
-    recommendations.push('Ensure consistent NAP (Name, Address, Phone) across all directories.')
-    recommendations.push('Add more detailed service descriptions to your profiles.')
-    recommendations.push('Collect and respond to customer reviews.')
-  } else {
-    recommendations.push('Good news! Your business is visible to AI assistants.')
-    recommendations.push('Monitor your visibility regularly to maintain your position.')
-    recommendations.push('Continue building quality citations and reviews.')
+  const localResult = results.find(r => r.prompt.includes('recommend'))
+  const directResult = results.find(r => r.prompt.includes('tell me about'))
+
+  // Not mentioned in local search
+  if (localResult && !localResult.mentioned) {
+    recommendations.push(
+      'Your business is not appearing in AI recommendations for local searches. This is the most important issue to fix.'
+    )
+    recommendations.push(
+      'Register your business on authoritative Swiss directories: local.ch, search.ch, zefix.ch'
+    )
+    recommendations.push(
+      'Create and optimize your Google Business Profile with complete, accurate information.'
+    )
   }
 
-  return recommendations
+  // Mentioned but with low info quality
+  if (localResult && localResult.mentioned && localResult.scoreBreakdown.infoQualityScore < 15) {
+    recommendations.push(
+      'AI mentions your business but lacks detailed information. Add comprehensive service descriptions to your website.'
+    )
+    recommendations.push(
+      'Implement Schema.org LocalBusiness markup on your website to help AI understand your services.'
+    )
+  }
+
+  // Not mentioned in direct query
+  if (directResult && !directResult.mentioned) {
+    recommendations.push(
+      'AI doesn\'t have specific information about your business. Build your online presence with consistent NAP (Name, Address, Phone) across all platforms.'
+    )
+  }
+
+  // Has real info but not being recommended
+  if (directResult?.mentioned && !localResult?.mentioned) {
+    recommendations.push(
+      'AI knows about your business but isn\'t recommending it. Focus on building citations and reviews to increase authority.'
+    )
+  }
+
+  // Low position in recommendations
+  if (localResult?.scoreBreakdown.positionScore && localResult.scoreBreakdown.positionScore < 15) {
+    recommendations.push(
+      'You\'re being mentioned but not as a top recommendation. Increase your authority through customer reviews and industry-specific directory listings.'
+    )
+  }
+
+  // General recommendations if doing well
+  if (overallScore >= 70) {
+    recommendations.push(
+      'Good visibility! Monitor your AI presence regularly and maintain consistent business information across all platforms.'
+    )
+    recommendations.push(
+      'Continue building quality citations and encourage satisfied customers to leave reviews.'
+    )
+  }
+
+  // Always add industry-specific recommendation
+  if (overallScore < 50) {
+    recommendations.push(
+      `Register on industry-specific directories for ${industry} in Switzerland.`
+    )
+  }
+
+  return recommendations.slice(0, 5) // Max 5 recommendations
 }
