@@ -180,19 +180,19 @@ export function BusinessForm() {
               key={s.id}
               className={`flex items-center gap-2 ${
                 s.id === step
-                  ? 'text-emerald-400'
+                  ? 'text-[#667eea]'
                   : s.id < step
-                  ? 'text-emerald-400/60'
-                  : 'text-slate-500'
+                  ? 'text-[#667eea]/70'
+                  : 'text-gray-400'
               }`}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center ${
                   s.id === step
-                    ? 'bg-emerald-500 text-white'
+                    ? 'bg-[#667eea] text-white'
                     : s.id < step
-                    ? 'bg-emerald-500/20 text-emerald-400'
-                    : 'bg-slate-700 text-slate-500'
+                    ? 'bg-[#667eea]/20 text-[#667eea]'
+                    : 'bg-gray-200 text-gray-400'
                 }`}
               >
                 {s.id < step ? (
@@ -203,7 +203,7 @@ export function BusinessForm() {
               </div>
               <span className="hidden sm:block text-sm font-medium">{s.name}</span>
               {i < STEPS.length - 1 && (
-                <div className="hidden sm:block w-12 h-0.5 bg-slate-700 mx-2" />
+                <div className="hidden sm:block w-12 h-0.5 bg-gray-300 mx-2" />
               )}
             </div>
           ))}
@@ -253,7 +253,7 @@ export function BusinessForm() {
                   )}
                 </Button>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-gray-500">
                 Enter your UID to auto-fill company details from the Swiss registry
               </p>
             </div>
@@ -264,7 +264,7 @@ export function BusinessForm() {
                 id="industry"
                 value={formData.industry}
                 onChange={(e) => updateField('industry', e.target.value)}
-                className="flex h-10 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="flex h-10 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#667eea]"
               >
                 <option value="">Select an industry</option>
                 {INDUSTRIES.map((ind) => (
@@ -283,7 +283,7 @@ export function BusinessForm() {
                 value={formData.description}
                 onChange={(e) => updateField('description', e.target.value)}
                 rows={3}
-                className="flex w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="flex w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#667eea]"
               />
             </div>
           </CardContent>
@@ -337,7 +337,7 @@ export function BusinessForm() {
                 id="addressCanton"
                 value={formData.addressCanton}
                 onChange={(e) => updateField('addressCanton', e.target.value)}
-                className="flex h-10 w-full rounded-lg border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="flex h-10 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#667eea]"
               >
                 <option value="">Select a canton</option>
                 {SWISS_CANTONS.map((canton) => (
@@ -386,7 +386,7 @@ export function BusinessForm() {
             <div className="space-y-2">
               <Label htmlFor="website">Website</Label>
               <div className="flex">
-                <span className="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-600 bg-slate-700 text-slate-400 text-sm">
+                <span className="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-200 bg-gray-100 text-gray-500 text-sm">
                   https://
                 </span>
                 <Input
@@ -437,13 +437,13 @@ export function BusinessForm() {
                 {formData.services.map((service) => (
                   <span
                     key={service}
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm border border-emerald-500/20"
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#667eea]/10 text-[#667eea] text-sm border border-[#667eea]/20"
                   >
                     {service}
                     <button
                       type="button"
                       onClick={() => removeService(service)}
-                      className="hover:text-white"
+                      className="hover:text-[#764ba2]"
                     >
                       ×
                     </button>
@@ -452,8 +452,8 @@ export function BusinessForm() {
               </div>
             )}
 
-            <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <h4 className="font-medium text-white mb-2">Common services for {formData.industry || 'your industry'}:</h4>
+            <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+              <h4 className="font-medium text-gray-900 mb-2">Common services for {formData.industry || 'your industry'}:</h4>
               <div className="flex flex-wrap gap-2">
                 {formData.industry === 'treuhand' && (
                   <>
@@ -466,7 +466,7 @@ export function BusinessForm() {
                             updateField('services', [...formData.services, s])
                           }
                         }}
-                        className="px-2 py-1 rounded bg-slate-700 text-slate-300 text-sm hover:bg-slate-600"
+                        className="px-2 py-1 rounded bg-white border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 hover:border-[#667eea]"
                       >
                         + {s}
                       </button>
@@ -484,7 +484,7 @@ export function BusinessForm() {
                             updateField('services', [...formData.services, s])
                           }
                         }}
-                        className="px-2 py-1 rounded bg-slate-700 text-slate-300 text-sm hover:bg-slate-600"
+                        className="px-2 py-1 rounded bg-white border border-gray-200 text-gray-700 text-sm hover:bg-gray-50 hover:border-[#667eea]"
                       >
                         + {s}
                       </button>
@@ -492,7 +492,7 @@ export function BusinessForm() {
                   </>
                 )}
                 {!formData.industry && (
-                  <span className="text-slate-500 text-sm">Select an industry to see suggestions</span>
+                  <span className="text-gray-500 text-sm">Select an industry to see suggestions</span>
                 )}
               </div>
             </div>

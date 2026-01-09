@@ -51,14 +51,14 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Settings</h1>
-        <p className="text-slate-400">Manage your account and subscription</p>
+        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+        <p className="text-gray-500">Manage your account and subscription</p>
       </div>
 
       {success && (
-        <div className="flex items-center gap-2 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400">
+        <div className="flex items-center gap-2 p-4 rounded-lg bg-green-50 border border-green-200 text-green-700">
           <CheckCircle className="h-5 w-5" />
           <span>Your subscription has been updated successfully!</span>
         </div>
@@ -68,19 +68,19 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <User className="h-5 w-5 text-indigo-400" />
+            <User className="h-5 w-5 text-[#667eea]" />
             <CardTitle>Account</CardTitle>
           </div>
           <CardDescription>Your account information</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
-            <span className="text-slate-400">Email</span>
-            <span className="text-white">{session?.user?.email}</span>
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
+            <span className="text-gray-500">Email</span>
+            <span className="text-gray-900">{session?.user?.email}</span>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
-            <span className="text-slate-400">Name</span>
-            <span className="text-white">{session?.user?.name || 'Not set'}</span>
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
+            <span className="text-gray-500">Name</span>
+            <span className="text-gray-900">{session?.user?.name || 'Not set'}</span>
           </div>
         </CardContent>
       </Card>
@@ -90,7 +90,7 @@ export default function SettingsPage() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CreditCard className="h-5 w-5 text-indigo-400" />
+              <CreditCard className="h-5 w-5 text-[#667eea]" />
               <CardTitle>Subscription</CardTitle>
             </div>
             {limits && (
@@ -98,9 +98,9 @@ export default function SettingsPage() {
                 variant={limits.plan === 'FREE' ? 'secondary' : 'default'}
                 className={
                   limits.plan === 'PROFESSIONAL'
-                    ? 'bg-indigo-500'
+                    ? 'bg-[#667eea] text-white'
                     : limits.plan === 'BUSINESS'
-                    ? 'bg-purple-500'
+                    ? 'bg-[#764ba2] text-white'
                     : ''
                 }
               >
@@ -114,25 +114,25 @@ export default function SettingsPage() {
           {limits ? (
             <>
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-lg bg-slate-800/50">
-                  <div className="text-2xl font-bold text-white">
+                <div className="p-4 rounded-lg bg-gray-50 border border-gray-100">
+                  <div className="text-2xl font-bold text-gray-900">
                     {limits.businessesUsed}
-                    <span className="text-sm font-normal text-slate-400">
+                    <span className="text-sm font-normal text-gray-500">
                       {' '}
                       / {limits.maxBusinesses === -1 ? '∞' : limits.maxBusinesses}
                     </span>
                   </div>
-                  <div className="text-sm text-slate-400">Businesses</div>
+                  <div className="text-sm text-gray-500">Businesses</div>
                 </div>
-                <div className="p-4 rounded-lg bg-slate-800/50">
-                  <div className="text-2xl font-bold text-white">
+                <div className="p-4 rounded-lg bg-gray-50 border border-gray-100">
+                  <div className="text-2xl font-bold text-gray-900">
                     {limits.llmChecksUsed}
-                    <span className="text-sm font-normal text-slate-400">
+                    <span className="text-sm font-normal text-gray-500">
                       {' '}
                       / {limits.maxLlmChecksPerMonth === -1 ? '∞' : limits.maxLlmChecksPerMonth}
                     </span>
                   </div>
-                  <div className="text-sm text-slate-400">LLM Checks (this month)</div>
+                  <div className="text-sm text-gray-500">LLM Checks (this month)</div>
                 </div>
               </div>
 
@@ -161,8 +161,8 @@ export default function SettingsPage() {
           ) : (
             <div className="animate-pulse space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <div className="h-20 bg-slate-800/50 rounded-lg" />
-                <div className="h-20 bg-slate-800/50 rounded-lg" />
+                <div className="h-20 bg-gray-100 rounded-lg" />
+                <div className="h-20 bg-gray-100 rounded-lg" />
               </div>
             </div>
           )}
@@ -173,20 +173,20 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Shield className="h-5 w-5 text-indigo-400" />
+            <Shield className="h-5 w-5 text-[#667eea]" />
             <CardTitle>Security</CardTitle>
           </div>
           <CardDescription>Manage your security settings</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex justify-between items-center py-2 border-b border-slate-800">
+          <div className="flex justify-between items-center py-2 border-b border-gray-100">
             <div>
-              <span className="text-white">Magic Link Authentication</span>
-              <p className="text-sm text-slate-400">
+              <span className="text-gray-900 font-medium">Magic Link Authentication</span>
+              <p className="text-sm text-gray-500">
                 Sign in via email link - no password required
               </p>
             </div>
-            <Badge variant="secondary">Enabled</Badge>
+            <Badge variant="secondary" className="bg-green-100 text-green-700">Enabled</Badge>
           </div>
         </CardContent>
       </Card>
