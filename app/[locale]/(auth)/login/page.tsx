@@ -90,11 +90,19 @@ function LoginForm() {
         window.location.href = callbackUrl
       }
     } catch (err: any) {
-      console.error('Google sign-in error:', err)
+      console.error('Google sign-in error:', err.code, err.message, err)
       if (err.code === 'auth/popup-closed-by-user') {
         // User closed the popup, don't show error
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setError('Domain not authorized. Add getcitedby.com to Firebase Console → Authentication → Settings → Authorized domains.')
+      } else if (err.code === 'auth/operation-not-allowed') {
+        setError('Google Sign-In not enabled. Enable it in Firebase Console → Authentication → Sign-in method.')
+      } else if (err.code === 'auth/popup-blocked') {
+        setError('Popup blocked. Please allow popups for this site.')
+      } else if (err.code === 'auth/cancelled-popup-request') {
+        // Multiple popups, ignore
       } else {
-        setError(t('errorGeneric'))
+        setError(`Auth error: ${err.code || err.message || t('errorGeneric')}`)
       }
     } finally {
       setIsGoogleLoading(false)
