@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Link as LocaleLink } from '@/i18n/routing'
 import FaqAccordion from '@/components/landing/FaqAccordion'
 
@@ -147,11 +148,13 @@ export default async function LandingPage({ params: { locale } }: PageProps) {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#667eea] to-[#764ba2] rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                      </svg>
-                    </div>
+                    <Image
+                      src="/chatgpt-icon.png"
+                      alt="ChatGPT"
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 rounded-full"
+                    />
                     <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-100 rounded-2xl rounded-tl-none px-4 py-3 text-gray-700 max-w-2xl">
                       {t('hero.chatAnswerPart1')}<span className="text-purple-600 font-semibold">{t('hero.chatAnswerCompany')}</span>{t('hero.chatAnswerPart2')}
                     </div>
