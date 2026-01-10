@@ -5,7 +5,6 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
   // Ensure server-side features work with database
   experimental: {
     serverComponentsExternalPackages: ['@prisma/client'],
