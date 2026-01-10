@@ -61,8 +61,6 @@ const secondary = [
     href: '/pricing',
     icon: CreditCard,
   },
-  {
-  },
 ]
 
 export function Sidebar() {
