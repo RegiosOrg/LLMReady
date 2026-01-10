@@ -156,9 +156,9 @@ function analyzeResponse(
   // Check location match
   const locationMatch = responseLower.includes(business.city.toLowerCase())
 
-  // Check services match
+  // Check services match (filter out any undefined/null values first)
   const servicesMatch = business.services
-    ? business.services.some(s => responseLower.includes(s.toLowerCase()))
+    ? business.services.filter(s => s && typeof s === 'string').some(s => responseLower.includes(s.toLowerCase()))
     : false
 
   // Check if recommended

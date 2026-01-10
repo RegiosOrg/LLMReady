@@ -77,7 +77,11 @@ export async function POST(req: NextRequest) {
       industry: business.industry || 'business',
       city: business.addressCity || 'Switzerland',
       canton: business.addressCanton || undefined,
-      services: business.services ? JSON.parse(business.services).map((s: { name: string }) => s.name) : [],
+      services: business.services
+        ? JSON.parse(business.services)
+            .map((s: { name?: string }) => s?.name)
+            .filter((name: unknown): name is string => typeof name === 'string' && name.length > 0)
+        : [],
     }
 
     // Run OpenAI check (Claude requires API key which isn't set)
